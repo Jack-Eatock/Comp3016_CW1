@@ -1,12 +1,17 @@
 #include "../Headers/Game.h"
 #include "../Headers/TextureManager.h"
 #include "../Headers/GameObject.h"
+#include "../Headers/EntityComponentSystem.h"
+#include "../Headers/Components.h"
 #include <iostream>
 
 GameObject* player;
 
 Game::Game() {};
 Game::~Game() {}
+
+Manager manager;
+auto& newPlayer(manager.AddEntity()); // Create Player
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -30,13 +35,16 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 			std::cout << "Renderer created!" << std::endl;
 		}
 		
-		player = new GameObject("Assets/Ship.png", renderer, 0, 0);
-
 		// Run the 
 		isRunning = true;
 	}
 	else
-		isRunning = false;
+		std::cout << "[ERROR] Subsystems failed to Initialise!" << std::endl;
+
+	player = new GameObject("Assets/Ship.png", renderer, 0, 0);
+	newPlayer.AddComponent<PositionComponent>();
+
+
 }
 
 void Game::HandleEvents()
@@ -58,6 +66,10 @@ void Game::HandleEvents()
 void Game::Update() 
 {
 	player->Update();
+
+	manager.Update();
+	std::cout << newPlayer.GetComponent<PositionComponent>().X() << "," <<
+		newPlayer.GetComponent<PositionComponent>().Y() << std::endl;
 }
 
 void Game::Render() 
@@ -65,6 +77,7 @@ void Game::Render()
 	SDL_RenderClear(renderer);
 
 	player->Render();
+	manager.Draw();
 
 	SDL_RenderPresent(renderer);
 }

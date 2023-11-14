@@ -1,4 +1,5 @@
-﻿  Game.cpp
+﻿  CW1.cpp
+  Game.cpp
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(39,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(40,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(75,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
@@ -11,4 +12,7 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(4
           [
               T=TransformComponent
           ]
+  GameObject.cpp
+  TextureManager.cpp
+  Generating Code...
   CW1.vcxproj -> C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\x64\Debug\CW1.exe

@@ -1,9 +1,9 @@
 #include "../Headers/Game.h"
 #include "../Headers/TextureManager.h"
+#include "../Headers/GameObject.h"
 #include <iostream>
 
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
+GameObject* player;
 
 Game::Game() {};
 Game::~Game() {}
@@ -30,7 +30,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 			std::cout << "Renderer created!" << std::endl;
 		}
 		
-		playerTex = TextureManager::LoadTexture("Assets/Ship.png", renderer);
+		player = new GameObject("Assets/Ship.png", renderer, 0, 0);
 
 		// Run the 
 		isRunning = true;
@@ -55,21 +55,16 @@ void Game::HandleEvents()
 	}
 }
 
-int cntr;
 void Game::Update() 
 {
-	cntr++;
-	destR.h = 16 * SCALE_FACTOR;
-	destR.w = 16 * SCALE_FACTOR;
-
-	destR.x = 800 - cntr;
+	player->Update();
 }
 
 void Game::Render() 
 {
 	SDL_RenderClear(renderer);
 
-	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+	player->Render();
 
 	SDL_RenderPresent(renderer);
 }

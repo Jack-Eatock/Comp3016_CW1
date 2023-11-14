@@ -30,7 +30,7 @@ public:
 		transform = &entity->GetComponent<TransformComponent>();
 
 		srcRect.x = srcRect.y = 0;
-		srcRect.w = srcRect.h = 32;
+		srcRect.w = srcRect.h =  PIXEL_RES;
 		destRect.w = destRect.h = srcRect.w * SCALE_FACTOR;
 	}
 

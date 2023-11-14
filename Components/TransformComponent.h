@@ -13,11 +13,7 @@ public:
 	Vector2D Velocity;
 	
 	bool IsBoosting = false;
-	float MaxSpeedBoosting = 10.00f;
-	float MaxSpeed = 6.00f;
 	float TmpMaxSpeed = 0.00f;
-	float Acceleration = .4f;
-	float Drag = .1f;
 	double Speed = 0.00f;
 
 	// Default constructor
@@ -44,24 +40,24 @@ public:
 		Vector2D normalisedInput = Input.Normalise();
 
 		// Apply Input
-		Velocity.X = Velocity.X + (normalisedInput.X * Acceleration);
-		Velocity.Y = Velocity.Y + (normalisedInput.Y * Acceleration);
+		Velocity.X = Velocity.X + (normalisedInput.X * ACCELERATION);
+		Velocity.Y = Velocity.Y + (normalisedInput.Y * ACCELERATION);
 
 		// Apply Drag
 		if (Velocity.X > 0.1) 
 		{
-			if (Velocity.X - Drag < 0)
+			if (Velocity.X - DRAG < 0)
 				Velocity.X = 0;
 			else
-				Velocity.X -= Drag;
+				Velocity.X -= DRAG;
 		}
 			
 		else if (Velocity.X < 0.1) 
 		{
-			if (Velocity.X + Drag > 0)
+			if (Velocity.X + DRAG > 0)
 				Velocity.X = 0;
 			else
-				Velocity.X += Drag;
+				Velocity.X += DRAG;
 		}
 			
 		else
@@ -69,18 +65,18 @@ public:
 
 		if (Velocity.Y > 0.1) 
 		{
-			if (Velocity.Y - Drag < 0)
+			if (Velocity.Y - DRAG < 0)
 				Velocity.Y = 0;
 			else
-				Velocity.Y -= Drag;
+				Velocity.Y -= DRAG;
 		}
 
 		else if (Velocity.Y < 0.1)
 		{
-			if (Velocity.Y + Drag > 0)
+			if (Velocity.Y + DRAG > 0)
 				Velocity.Y = 0;
 			else
-				Velocity.Y += Drag;
+				Velocity.Y += DRAG;
 		}
 		else
 			Velocity.Y = 0;
@@ -89,9 +85,9 @@ public:
 		Speed = sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
 
 		if (IsBoosting)
-			TmpMaxSpeed = MaxSpeedBoosting;
+			TmpMaxSpeed = MAXSPEEDBOOSTING;
 		else
-			TmpMaxSpeed = MaxSpeed;
+			TmpMaxSpeed = MAXSPEED;
 
 
 		if (Speed > TmpMaxSpeed)

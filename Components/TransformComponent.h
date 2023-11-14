@@ -53,7 +53,6 @@ public:
 			else
 				Velocity.X -= DRAG;
 		}
-			
 		else if (Velocity.X < 0.1) 
 		{
 			if (Velocity.X + DRAG > 0)
@@ -61,7 +60,6 @@ public:
 			else
 				Velocity.X += DRAG;
 		}
-			
 		else
 			Velocity.X = 0;
 
@@ -72,7 +70,6 @@ public:
 			else
 				Velocity.Y -= DRAG;
 		}
-
 		else if (Velocity.Y < 0.1)
 		{
 			if (Velocity.Y + DRAG > 0)
@@ -83,14 +80,37 @@ public:
 		else
 			Velocity.Y = 0;
 
+		
 		// Calculate the magnitude using the formula: sqrt(X^2 + Y^2 + Z^2)
 		Speed = sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
 
+		// If they go out of bounds, push them back.
+		 
+		float bounceBackSpeed = Speed + BOUNCEOFWALL;
+		if (Speed < BOUNCEOFWALL)
+			bounceBackSpeed = BOUNCEOFWALL * ACCELERATION;
+
+		// Left
+		if (Position.X < 0 )
+			Velocity.X += bounceBackSpeed;
+
+		// Right
+		else if (Position.X > WINDOW_WIDTH - 50)
+			Velocity.X -= bounceBackSpeed;
+
+		// Up
+		if (Position.Y < 0)
+			Velocity.Y += bounceBackSpeed;
+
+		// Down
+		else if (Position.Y > WINDOW_HEIGHT - 50)
+			Velocity.Y -= bounceBackSpeed;
+
+		// Limiting speed;
 		if (IsBoosting)
 			TmpMaxSpeed = MAXSPEEDBOOSTING;
 		else
 			TmpMaxSpeed = MAXSPEED;
-
 
 		if (Speed > TmpMaxSpeed)
 		{
@@ -111,6 +131,6 @@ public:
 		Angle = (radAngle * 180 / M_PI);
 
 
-		std::cout << "here " << Input << " a " << Speed << std::endl;
+		std::cout << "here " << Position << " a " << Speed << std::endl;
 	}
 };

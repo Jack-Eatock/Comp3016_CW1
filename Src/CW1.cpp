@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     int frameTime;
 
     game = new Game();
-    game->Init("The Resiliance of Mankind", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    game->Init("The Resiliance of Mankind", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, false);
     while (game->Running()) 
     {
         frameStart = SDL_GetTicks();

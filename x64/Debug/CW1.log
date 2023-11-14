@@ -1,4 +1,5 @@
 ﻿  Game.cpp
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(89,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(46,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(47,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(25,46): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data

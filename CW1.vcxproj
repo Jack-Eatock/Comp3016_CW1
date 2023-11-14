@@ -140,9 +140,11 @@
     <ClCompile Include="Src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Components.h" />
+    <ClInclude Include="Components\Components.h" />
+    <ClInclude Include="Components\PositionComponent.h" />
+    <ClInclude Include="Components\SpriteComponent.h" />
     <ClInclude Include="Headers\Constants.h" />
-    <ClInclude Include="Headers\EntityComponentSystem.h" />
+    <ClInclude Include="Components\EntityComponentSystem.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameObject.h" />
     <ClInclude Include="Headers\TextureManager.h" />

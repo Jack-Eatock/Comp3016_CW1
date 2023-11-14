@@ -1,17 +1,13 @@
 #include "../Headers/Game.h"
 #include "../Headers/TextureManager.h"
-#include "../Headers/GameObject.h"
-#include "../Headers/EntityComponentSystem.h"
-#include "../Headers/Components.h"
+#include "../Components/Components.h"
 #include <iostream>
-
-GameObject* player;
 
 Game::Game() {};
 Game::~Game() {}
 
 Manager manager;
-auto& newPlayer(manager.AddEntity()); // Create Player
+auto& player(manager.AddEntity()); // Create Player Entity
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -32,19 +28,18 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 		if (renderer) 
 		{
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			TextureManager::init(renderer);
 			std::cout << "Renderer created!" << std::endl;
 		}
-		
+
 		// Run the 
 		isRunning = true;
 	}
 	else
 		std::cout << "[ERROR] Subsystems failed to Initialise!" << std::endl;
 
-	player = new GameObject("Assets/Ship.png", renderer, 0, 0);
-	newPlayer.AddComponent<PositionComponent>();
-
-
+	player.AddComponent<PositionComponent>(50, 50);
+	player.AddComponent<SpriteComponent>("Assets/Ship.png");
 }
 
 void Game::HandleEvents()
@@ -65,18 +60,18 @@ void Game::HandleEvents()
 
 void Game::Update() 
 {
-	player->Update();
-
+	manager.Refresh();
 	manager.Update();
-	std::cout << newPlayer.GetComponent<PositionComponent>().X() << "," <<
-		newPlayer.GetComponent<PositionComponent>().Y() << std::endl;
+
+	if (player.GetComponent<PositionComponent>().X() > 120) {
+		player.GetComponent<SpriteComponent>().SetText("Assets/ShipDestroyed.png");
+	}
 }
 
 void Game::Render() 
 {
 	SDL_RenderClear(renderer);
 
-	player->Render();
 	manager.Draw();
 
 	SDL_RenderPresent(renderer);

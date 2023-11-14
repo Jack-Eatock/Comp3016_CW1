@@ -1,6 +1,9 @@
 #include "../Headers/Game.h"
 #include <iostream>
 
+SDL_Texture* playerTex;
+SDL_Rect srcR, destR;
+
 Game::Game() {};
 Game::~Game() {}
 
@@ -26,6 +29,11 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 			std::cout << "Renderer created!" << std::endl;
 		}
 
+
+		SDL_Surface* tmpSurface = IMG_Load("Assets/Ship.png");
+		playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+		SDL_FreeSurface(tmpSurface);
+
 		// Run the 
 		isRunning = true;
 	}
@@ -49,14 +57,22 @@ void Game::HandleEvents()
 	}
 }
 
+int cntr;
 void Game::Update() 
 {
+	cntr++;
+	destR.h = 16 * SCALE_FACTOR;
+	destR.w = 16 * SCALE_FACTOR;
 
+	destR.x = 800 - cntr / 100;
 }
 
 void Game::Render() 
 {
 	SDL_RenderClear(renderer);
+
+	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+
 	SDL_RenderPresent(renderer);
 }
 

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "SDL.h"
 #include "../Headers/Game.h"
+
 Game* game = nullptr;
 
 int main(int argc, char *argv[])

@@ -11,9 +11,14 @@ private:
 	TransformComponent* transform;
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;
+	SDL_RendererFlip flip;
 
 public:
-	SpriteComponent() = default;
+
+	SpriteComponent() 
+	{
+
+	}
 
 	SpriteComponent(const char* path) 
 	{
@@ -32,7 +37,9 @@ public:
 		srcRect.x = srcRect.y = 0;
 		srcRect.w = srcRect.h =  PIXEL_RES;
 		destRect.w = destRect.h = srcRect.w * SCALE_FACTOR;
+		flip = SDL_FLIP_NONE;
 	}
+
 
 	void Update() override
 	{
@@ -42,6 +49,6 @@ public:
 
 	void Draw() override 
 	{
-		TextureManager::Draw(texture, srcRect, destRect);
+		TextureManager::Draw(texture, srcRect, destRect, transform->Angle, NULL, &flip);
 	}
 };

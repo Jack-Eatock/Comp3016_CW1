@@ -2,19 +2,21 @@
 
 #include "../Components/EntityComponentSystem.h"
 #include "../Headers/Vector2D.h"
+#include "SDL.h"
 
 class TransformComponent : public Component
 {
 
 public:
-
+	
+	double Angle;
 	Vector2D Input;
 	Vector2D Position;
 	Vector2D Velocity;
-	
 	bool IsBoosting = false;
 	float TmpMaxSpeed = 0.00f;
 	double Speed = 0.00f;
+	Vector2D MousePos;
 
 	// Default constructor
 	TransformComponent()
@@ -101,6 +103,13 @@ public:
 
 		Position.X += Velocity.X;
 		Position.Y += Velocity.Y;
+
+		// Calculate the angle of the ship. Look at direction from ship to mouse pos.
+		//Vector2D dif = MousePos - Position;
+
+		float radAngle = atan2(MousePos.Y - Position.Y, MousePos.X - Position.X);
+		Angle = (radAngle * 180 / M_PI);
+
 
 		std::cout << "here " << Input << " a " << Speed << std::endl;
 	}

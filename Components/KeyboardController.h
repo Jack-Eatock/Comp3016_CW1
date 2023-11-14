@@ -20,6 +20,13 @@ public:
 
 	void Update() override
 	{
+		if (Game::event.type == SDL_MOUSEMOTION) 
+		{
+			transform->MousePos.X = Game::event.button.x;
+			transform->MousePos.Y = Game::event.button.y;
+		}
+
+		// Keyboard
 		if (Game::event.type == SDL_KEYDOWN)
 		{
 			switch (Game::event.key.keysym.sym)

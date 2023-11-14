@@ -1,7 +1,8 @@
-﻿  CW1.cpp
-  Game.cpp
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(39,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(40,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+﻿  Game.cpp
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(46,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(47,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(25,46): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(26,46): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(75,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
@@ -12,7 +13,4 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(4
           [
               T=TransformComponent
           ]
-  GameObject.cpp
-  TextureManager.cpp
-  Generating Code...
   CW1.vcxproj -> C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\x64\Debug\CW1.exe

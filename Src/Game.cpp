@@ -1,4 +1,5 @@
 #include "../Headers/Game.h"
+#include "../Headers/TextureManager.h"
 #include <iostream>
 
 SDL_Texture* playerTex;
@@ -28,11 +29,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			std::cout << "Renderer created!" << std::endl;
 		}
-
-
-		SDL_Surface* tmpSurface = IMG_Load("Assets/Ship.png");
-		playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-		SDL_FreeSurface(tmpSurface);
+		
+		playerTex = TextureManager::LoadTexture("Assets/Ship.png", renderer);
 
 		// Run the 
 		isRunning = true;
@@ -64,7 +62,7 @@ void Game::Update()
 	destR.h = 16 * SCALE_FACTOR;
 	destR.w = 16 * SCALE_FACTOR;
 
-	destR.x = 800 - cntr / 100;
+	destR.x = 800 - cntr;
 }
 
 void Game::Render() 

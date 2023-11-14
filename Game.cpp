@@ -1,55 +1,70 @@
 #include "Game.h"
+#include <iostream>
 
-Game::Game()
-{
-    SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-};
+Game::Game() {};
+Game::~Game() {}
 
-Game::~Game()
+void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+	int flags = 0;
+	if (fullscreen) 
+		flags = SDL_WINDOW_FULLSCREEN;
+
+	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+		std::cout << "Subsystems Initiated!" << std::endl;
+
+		// Create Window
+		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+		if (window)
+			std::cout << "Window created!" << std::endl;
+
+		// Create Renderer
+		renderer = SDL_CreateRenderer(window, -1, 0);
+		if (renderer) 
+		{
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			std::cout << "Renderer created!" << std::endl;
+		}
+
+		// Run the 
+		isRunning = true;
+	}
+	else
+		isRunning = false;
 }
 
-void Game::Run()
+void Game::handleEvents()
 {
-    while (true) 
-    {
-        Input();
-        Render();
-    }
+	SDL_Event event;
+	SDL_PollEvent(&event);
+	switch (event.type)
+	{
+		case SDL_QUIT:
+			std::cout << "Input Registered: 'Quit' " << std::endl;
+			isRunning = false;
+			break;
+
+		default:
+			break;
+	}
 }
 
-void Game::Input()
+void Game::update() 
 {
-    SDL_Event event;
-    const Uint8* state = SDL_GetKeyboardState(NULL);
-    while (SDL_PollEvent(&event)) {
-        if (state[SDL_SCANCODE_X])
-        {
-            SDL_Quit();
-            exit(0);
-        }
-        else {
 
-            if (state[SDL_SCANCODE_UP]) {
-                
-            }
-
-        }
-    }
 }
 
-void Game::Render()
+void Game::render() 
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_Rect test = { 40, 40, 20, 20 };
-    SDL_RenderFillRect(renderer, &test);
-    SDL_RenderPresent(renderer);
-    SDL_Delay(50);
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 }
+
+void Game::clean() 
+{
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
+	std::cout << "Game Cleaned " << std::endl;
+}
+

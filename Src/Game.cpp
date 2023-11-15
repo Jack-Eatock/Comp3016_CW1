@@ -1,9 +1,9 @@
 #include "../Headers/Game.h"
 #include "../Headers/TextureManager.h"
-#include "../Components/Components.h"
-#include <iostream>
 #include "../Headers/Vector2D.h"
 #include "../Headers/CollisionDetection.h"
+#include "../Headers/AssetManager.h"
+#include "../Components/Components.h"
 
 Manager manager;
 
@@ -11,6 +11,7 @@ Game* Game::Instance;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<ColliderComponent*> Game::colliders;
+AssetManager* Game::assets = new AssetManager(&manager);
 
 auto& player(manager.AddEntity()); // Create Player Entity
 auto& player2(manager.AddEntity()); // Other Player
@@ -48,14 +49,16 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "[ERROR] Subsystems failed to Initialise!" << std::endl;
 
+	assets->AddTexture("PlayerShip", "Assets/UpdatedShip.png");
+
 	player.AddComponent<TransformComponent>(50, 50);
-	player.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
+	player.AddComponent<SpriteComponent>("PlayerShip");
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>(32, 32, "Player");
 	player.AddComponent<PlayerComponent>();
 
 	player2.AddComponent<TransformComponent>(400, 200);
-	player2.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
+	player2.AddComponent<SpriteComponent>("PlayerShip");
 	player2.AddComponent<ColliderComponent>(32, 32, "Enemy");
 	player2.AddComponent<EnemyComponent>();
 }

@@ -7,6 +7,7 @@
 #include "Vector2D.h"
 
 class ColliderComponent;
+class AssetManager;
 
 class Game
 {
@@ -28,6 +29,7 @@ public:
 	static 	SDL_Renderer* renderer;
 	static  SDL_Event event;
 	static  std::vector<ColliderComponent*> colliders;
+	static  AssetManager* assets;
 
 private:
 	bool isRunning;

@@ -1,9 +1,11 @@
 #pragma once
 
-#include "Components.h"
+#include "../Headers/TextureManager.h"
+#include "TransformComponent.h"
 #include "SDL.h"
 #include "../Headers/Constants.h"
-#include "../Headers/TextureManager.h"
+#include "../Headers/AssetManager.h"
+#include "../Headers/Game.h"
 
 class SpriteComponent : public Component 
 {
@@ -20,19 +22,19 @@ public:
 
 	}
 
-	SpriteComponent(const char* path) 
+	SpriteComponent(std::string assetID) 
 	{
-		SetText(path);
+		SetText(assetID);
 	}
 
 	~SpriteComponent() 
 	{
-		SDL_DestroyTexture(texture);
+	
 	}
 
-	void SetText(const char* path) 
+	void SetText(std::string assetID)
 	{
-		texture = TextureManager::LoadTexture(path);
+		texture = Game::assets->GetTexture(assetID);
 	}
 
 	void Init() override

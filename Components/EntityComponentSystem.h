@@ -14,6 +14,7 @@
 
 class Component;
 class Entity;
+class Manager;
 
 using ComponentID = std::size_t;
 
@@ -23,6 +24,7 @@ inline ComponentID GetComponentTypeID()
 	static ComponentID lastID = 0;
 	return lastID++;
 }
+
 
 template <typename T> inline ComponentID GetComponentTypeID() noexcept 
 {

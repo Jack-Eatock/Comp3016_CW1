@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Components/EntityComponentSystem.h"
+#include "EntityComponentSystem.h"
 #include "../Headers/Vector2D.h"
 #include "SDL.h"
 #include "../Headers/Constants.h"

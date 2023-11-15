@@ -134,6 +134,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\SpriteComponent.cpp" />
+    <ClCompile Include="Src\AssetManager.cpp" />
     <ClCompile Include="Src\CollisionDetection.cpp" />
     <ClCompile Include="Src\CW1.cpp" />
     <ClCompile Include="Src\EnemyComponent.cpp" />
@@ -146,6 +148,7 @@
     <ClInclude Include="Components\ColliderComponent.h" />
     <ClInclude Include="Components\EnemyComponent.h" />
     <ClInclude Include="Components\PlayerComponent.h" />
+    <ClInclude Include="Headers\AssetManager.h" />
     <ClInclude Include="Headers\CollisionDetection.h" />
     <ClInclude Include="Components\Components.h" />
     <ClInclude Include="Components\TransformComponent.h" />

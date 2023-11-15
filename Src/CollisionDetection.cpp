@@ -1,6 +1,4 @@
 #include "../Headers/CollisionDetection.h"
-#include "../Components/Components.h"
-
 
 bool CollisionDetection::RectCollision_AABB(const SDL_Rect& recA, const SDL_Rect& recB)
 {

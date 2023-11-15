@@ -1,7 +1,6 @@
 #include "../Components/PlayerComponent.h"
 #include "../Headers/Game.h"
 
-
 void PlayerComponent::Fire()
 {
 	std::cout << "Bang" << std::endl;

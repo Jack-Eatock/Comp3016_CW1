@@ -2,7 +2,7 @@
 #pragma once
 #include "SDL.h"
 #include "EntityComponentSystem.h"
-#include "Components.h"
+#include "../Headers/CollisionDetection.h"
 
 class EnemyComponent : public Component
 {

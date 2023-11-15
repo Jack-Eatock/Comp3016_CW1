@@ -2,16 +2,23 @@
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(109,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(50,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(51,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(25,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(26,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(23,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(24,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(84,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(48,8): message : see reference to function template instantiation 'T &Entity::AddComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(51,8): message : see reference to function template instantiation 'T &Entity::AddComponent<TransformComponent,int,int>(int &&,int &&)' being compiled
           with
           [
               T=TransformComponent
           ]
+  PlayerComponent.cpp
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(109,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(50,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(51,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(23,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(24,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
+  Generating Code...
   CW1.vcxproj -> C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\x64\Debug\CW1.exe

@@ -7,6 +7,7 @@
 
 Manager manager;
 
+Game* Game::Instance;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<ColliderComponent*> Game::colliders;
@@ -19,6 +20,8 @@ Game::~Game() {}
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+	Game::Instance = this;
+
 	int flags = 0;
 	if (fullscreen) 
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -55,7 +58,6 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	player2.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
 	player2.AddComponent<ColliderComponent>(32, 32, "Enemy");
 	player2.AddComponent<EnemyComponent>();
-	
 }
 
 void Game::HandleEvents()
@@ -104,5 +106,10 @@ void Game::Clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
+	std::cout << "Game Cleaned " << std::endl;
+}
+
+void Game::SpawnBullet(Vector2D startPos, double angle) 
+{
 	std::cout << "Game Cleaned " << std::endl;
 }

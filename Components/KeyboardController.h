@@ -4,13 +4,10 @@
 #include "EntityComponentSystem.h"
 #include "Components.h"
 
-
-
 class KeyboardController : public Component 
 {
 public:
 	TransformComponent* transform;
-
 	bool up, down, left, right;
 
 	void Init() override
@@ -20,6 +17,7 @@ public:
 
 	void Update() override
 	{
+		// Mouse Move
 		if (Game::event.type == SDL_MOUSEMOTION) 
 		{
 			transform->TargetPos.X = Game::event.button.x;

@@ -4,12 +4,16 @@
 #include "SDL_image.h"
 #include "Constants.h"
 #include <vector>
+#include "Vector2D.h"
 
 class ColliderComponent;
 
 class Game
 {
 public:
+
+	static Game* Instance;
+
 	Game();
 	~Game();
 
@@ -19,6 +23,7 @@ public:
 	void Render();
 	void Clean();
 	bool Running() { return isRunning; }
+	void SpawnBullet(Vector2D startPos, double angle);
 
 	static 	SDL_Renderer* renderer;
 	static  SDL_Event event;

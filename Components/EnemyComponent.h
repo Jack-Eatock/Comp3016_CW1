@@ -25,6 +25,8 @@ public:
 
 	void Collision(const ColliderComponent& collider);
 
+	void Fire();
+
 private: 
 		std::random_device seed;
 		std::mt19937 gen;

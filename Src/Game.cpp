@@ -51,6 +51,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->AddTexture("PlayerShip", "Assets/UpdatedShip.png");
 	assets->AddTexture("Bullet", "Assets/FriendlyBullet.png");
 	assets->AddTexture("EnemyShip", "Assets/EnemyShip1.png");
+	assets->AddTexture("EnemyBullet", "Assets/EnemyBullet.png");
 
 	player.AddComponent<TransformComponent>(50, 50);
 	player.AddComponent<SpriteComponent>("PlayerShip");
@@ -66,8 +67,6 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 		player2.AddComponent<ColliderComponent>(32, 32, "Enemy");
 		player2.AddComponent<EnemyComponent>();
 	}
-
-	
 }
 
 void Game::HandleEvents()

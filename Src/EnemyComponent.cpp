@@ -3,6 +3,7 @@
 #include <random>
 #include <iostream>
 #include "../Components/Components.h"
+#include "../Components/EntityComponentSystem.h"
 
 void EnemyComponent::Collision(const ColliderComponent& collider)
 {
@@ -11,6 +12,21 @@ void EnemyComponent::Collision(const ColliderComponent& collider)
 		entity->Destroy();
 		collider.entity->Destroy();
 	}
+}
+
+void EnemyComponent::Fire()
+{
+	std::string spriteId = "EnemyBullet";
+	std::string colliderId = "EnemyBullet";
+	Vector2D direction = transform->TargetPos;
+	direction -= transform->Position;
+	direction = direction.Normalise();
+
+	float offset = 32;
+	Vector2D startPos = transform->Position;
+	startPos.Add(Vector2D(direction.X * offset, direction.Y * offset));
+	Game::assets->SpawnBullet(startPos, 1000, 25, spriteId, colliderId, direction);
+	
 }
 
 void EnemyComponent::UpdateLocal()
@@ -30,12 +46,14 @@ void EnemyComponent::UpdateLocal()
 
 		if (dist < 20) 
 			headingToLocation = false;
+
+		Manager& temp = entity->manager;
+		Entity& player1 = temp.GetEntity();
+
+		transform->TargetPos = player1.GetComponent<TransformComponent>().Position;
 	}
 
 	else {
-
-		
-
 		std::mt19937 gen{ seed() }; // seed the generator
 
 		std::uniform_int_distribution<> dist{ 30, WINDOW_WIDTH - 30 };
@@ -55,6 +73,14 @@ void EnemyComponent::UpdateLocal()
 		transform->MovementInput = direction;
 
 		headingToLocation = true;
+
+
+		std::uniform_int_distribution<> dist3{ 0, 4 };
+		int shouldIShoot = dist3(gen);
+
+		if (shouldIShoot == 1) {
+			Fire();
+		}
 
 		//std::cout << "Pos " << transform->Position << " Target" << targetPos <<  " " << direction << std::endl;
 	}

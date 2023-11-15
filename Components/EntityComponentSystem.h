@@ -52,14 +52,13 @@ public:
 class Entity 
 {
 private:
-	Manager& manager;
-
 	bool active = true;
 	std::vector<std::unique_ptr<Component>> components;
 	ComponentArray componentArray;
 	ComponentBitSet componentBitSet;
 	
 public:
+	Manager& manager;
 	Entity(Manager& mManager) : manager(mManager) {}
 
 	void Update()
@@ -149,5 +148,10 @@ public:
 		std::unique_ptr<Entity> uPtr{ e }; // Pointer to new entity
 		entities.emplace_back(std::move(uPtr)); // Add new entity to the list of  entities.
 		return *e;
+	}
+
+	Entity& GetEntity()
+	{
+		return *entities[0];
 	}
 };

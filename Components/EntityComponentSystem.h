@@ -7,6 +7,11 @@
 #include <bitset>
 #include <array>
 
+/// <summary>
+/// Every object in the game is an entity.
+/// Every entity can have components that add functionality to the entity, similar to game engines like Unity.
+/// </summary>
+
 class Component;
 class Entity;
 
@@ -63,10 +68,10 @@ public:
 	bool IsActive() const{ return active; }
 	void Destroy() { active = false; }
 
-	template <typename T> bool HasComponent() const 
+	template <typename T> bool HasComponent() const
 	{
 		// Check if the entity has a component of the type T.
-		return componentBitSet[GetComponentTypeID<T>];
+		return componentBitSet[GetComponentTypeID<T>()];
 	}
 
 	template <typename T, typename... TArgs>
@@ -98,18 +103,21 @@ private:
 	std::vector<std::unique_ptr<Entity>> entities; // All entities in the game. Such as car or player.
 
 public:
+
 	void Update() 
 	{
 		// Update all entities
 		for (auto& e : entities)
 			e->Update();
 	}
+
 	void Draw() 
 	{
 		// Draw all entities
 		for (auto& e : entities)
 			e->Draw();
 	}
+
 	void Refresh() 
 	{
 		// Erase all entities that are inactive.
@@ -120,6 +128,7 @@ public:
 			}),
 			std::end(entities));
 	}
+
 	Entity& AddEntity() 
 	{
 		Entity* e = new Entity(); // Create new entity.

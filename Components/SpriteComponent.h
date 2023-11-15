@@ -25,6 +25,11 @@ public:
 		SetText(path);
 	}
 
+	~SpriteComponent() 
+	{
+		SDL_DestroyTexture(texture);
+	}
+
 	void SetText(const char* path) 
 	{
 		texture = TextureManager::LoadTexture(path);
@@ -39,7 +44,6 @@ public:
 		destRect.w = destRect.h = srcRect.w * SCALE_FACTOR;
 		flip = SDL_FLIP_NONE;
 	}
-
 
 	void Update() override
 	{

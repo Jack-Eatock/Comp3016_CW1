@@ -3,6 +3,7 @@
 #include "../Components/Components.h"
 #include <iostream>
 #include "../Headers/Vector2D.h"
+#include "../Headers/CollisionDetection.h"
 
 Manager manager;
 
@@ -10,6 +11,7 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
 auto& player(manager.AddEntity()); // Create Player Entity
+auto& player2(manager.AddEntity()); // Other Player
 
 Game::Game() {};
 Game::~Game() {}
@@ -45,11 +47,16 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.AddComponent<TransformComponent>(50, 50);
 	player.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
 	player.AddComponent<KeyboardController>();
+	player.AddComponent<ColliderComponent>(32, 32, "Player");
+
+	player2.AddComponent<TransformComponent>(400, 200);
+	player2.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
+	player2.AddComponent<ColliderComponent>(32, 32, "Bullet");
+	
 }
 
 void Game::HandleEvents()
 {
-
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{
@@ -67,6 +74,11 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
+
+	if (CollisionDetection::RectCollision_AABB(player.GetComponent<ColliderComponent>().collider, player2.GetComponent<ColliderComponent>().collider))
+	{
+		std::cout << "COLISIONS" << std::endl;
+	}
 }
 
 void Game::Render() 

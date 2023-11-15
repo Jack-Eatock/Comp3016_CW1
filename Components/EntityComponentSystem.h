@@ -154,4 +154,12 @@ public:
 	{
 		return *entities[0];
 	}
+
+	void DestroyAllEntities()
+	{
+		for (int i = 0; i < entities.size(); i++) {
+			entities[i]->Destroy();
+		}
+		entities.clear();
+	}
 };

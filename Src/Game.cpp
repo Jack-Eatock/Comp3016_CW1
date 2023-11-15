@@ -6,17 +6,18 @@
 #include "../Components/Components.h"
 
 Manager manager;
-
 Game* Game::Instance;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<ColliderComponent*> Game::colliders;
 AssetManager* Game::assets = new AssetManager(&manager);
-
-Entity& player(manager.AddEntity()); // Create Player Entity
-
+SDL_Surface* backgroundSurface;
+SDL_Texture* backgroundTexture;
+SDL_Rect backgroundRect, backgroundDest;
 Game::Game() {};
 Game::~Game() {}
+
+int playerHealth = 3;
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -48,18 +49,41 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "[ERROR] Subsystems failed to Initialise!" << std::endl;
 
+	SetupAssets();
+	StartGame();
+}
+
+void Game::SetupAssets()
+{
 	assets->AddTexture("PlayerShip", "Assets/UpdatedShip.png");
 	assets->AddTexture("Bullet", "Assets/FriendlyBullet.png");
 	assets->AddTexture("EnemyShip", "Assets/EnemyShip1.png");
 	assets->AddTexture("EnemyBullet", "Assets/EnemyBullet.png");
 
-	player.AddComponent<TransformComponent>(50, 50);
-	player.AddComponent<SpriteComponent>("PlayerShip");
-	player.AddComponent<KeyboardController>();
-	player.AddComponent<ColliderComponent>(32, 32, "Player");
-	player.AddComponent<PlayerComponent>();
+	// Background
+	backgroundSurface = IMG_Load("Assets/Background.png");
+	backgroundTexture = SDL_CreateTextureFromSurface(Game::renderer, backgroundSurface);
+	SDL_FreeSurface(backgroundSurface);
+	backgroundRect.x = 0;
+	backgroundRect.y = 0;
+	backgroundRect.w = WINDOW_WIDTH;
+	backgroundRect.h = WINDOW_HEIGHT;
+	backgroundDest.w = backgroundRect.w;
+	backgroundDest.h = backgroundRect.h;
+}
 
-	for (size_t i = 0; i < 5; i++)
+void Game::StartGame()
+{
+	
+
+	Entity& player1 = manager.AddEntity(); // Create Player Entity
+	player1.AddComponent<TransformComponent>(50, 50);
+	player1.AddComponent<SpriteComponent>("PlayerShip");
+	player1.AddComponent<KeyboardController>();
+	player1.AddComponent<ColliderComponent>(32, 32, "Player");
+	player1.AddComponent<PlayerComponent>();
+
+	for (size_t i = 0; i < 6; i++)
 	{
 		Entity& player2 = (manager.AddEntity());
 		player2.AddComponent<TransformComponent>(100 * i, 200);
@@ -68,6 +92,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 		player2.AddComponent<EnemyComponent>();
 	}
 }
+
 
 void Game::HandleEvents()
 {
@@ -88,7 +113,59 @@ void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
+	CollisionDetection();
+	
+}
 
+void Game::Render() 
+{
+	SDL_RenderClear(renderer);
+
+	// background
+	SDL_RenderCopy(Game::renderer, backgroundTexture, &backgroundRect, &backgroundDest);
+
+	manager.Draw();
+
+	SDL_RenderPresent(renderer);
+
+
+void Game::Clean() 
+{
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	SDL_Quit();
+	std::cout << "Game Cleaned " << std::endl;
+}
+
+void Game::PlayerDestroyedAShip()
+{
+
+}
+
+void Game::Restart()
+{
+	playerHealth = 3;
+	colliders.clear();
+	manager.DestroyAllEntities();
+
+	SDL_Delay(1000);
+
+	StartGame();
+}
+
+void Game::PlayerHit()
+{
+	playerHealth--;
+	if (playerHealth <= 0) 
+	{
+		std::cout << "Player Died!" << std::endl;
+		Restart();
+	}
+		
+}
+
+void Game::CollisionDetection()
+{
 	for (auto colider : Game::colliders)
 	{
 		for (auto colider2 : Game::colliders)
@@ -100,22 +177,4 @@ void Game::Update()
 		}
 	}
 }
-
-void Game::Render() 
-{
-	SDL_RenderClear(renderer);
-
-	manager.Draw();
-
-	SDL_RenderPresent(renderer);
-}
-
-void Game::Clean() 
-{
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
-	std::cout << "Game Cleaned " << std::endl;
-}
-
 

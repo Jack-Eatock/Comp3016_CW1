@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../Components/Components.h"
 #include "../Components/EntityComponentSystem.h"
+#include "SDL.h"
 
 void EnemyComponent::Collision(const ColliderComponent& collider)
 {
@@ -16,6 +17,10 @@ void EnemyComponent::Collision(const ColliderComponent& collider)
 
 void EnemyComponent::Fire()
 {
+	if (SDL_GetTicks() - timeOfLastShot < timeToReload)
+		return;
+
+	timeOfLastShot = SDL_GetTicks();
 	std::string spriteId = "EnemyBullet";
 	std::string colliderId = "EnemyBullet";
 	Vector2D direction = transform->TargetPos;
@@ -31,6 +36,11 @@ void EnemyComponent::Fire()
 
 void EnemyComponent::UpdateLocal()
 {
+	//std::cout << "AA " << initialDelay - spawnTime << std::endl;
+	if (SDL_GetTicks() >  spawnTime + initialDelay ) {
+		Fire();
+	}
+
 	if (headingToLocation) {
 
 		// Have they reached the location?
@@ -73,23 +83,16 @@ void EnemyComponent::UpdateLocal()
 		transform->MovementInput = direction;
 
 		headingToLocation = true;
-
-
-		std::uniform_int_distribution<> dist3{ 0, 4 };
-		int shouldIShoot = dist3(gen);
-
-		if (shouldIShoot == 1) {
-			Fire();
-		}
-
-		//std::cout << "Pos " << transform->Position << " Target" << targetPos <<  " " << direction << std::endl;
 	}
-	
 }
 
 void EnemyComponent::InitLocal()
 {
 	std::mt19937 gen{ seed() }; // seed the generator
-
+	std::uniform_int_distribution<> dist6{ 0, 4};
+	
+	initialDelay = dist6(gen) * 1000;
+	std::cout << "AA " << initialDelay << std::endl;
 	transform = &entity->GetComponent<TransformComponent>();
+	spawnTime = SDL_GetTicks();
 }

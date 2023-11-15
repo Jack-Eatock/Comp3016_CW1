@@ -24,7 +24,9 @@ public:
 	void Render();
 	void Clean();
 	bool Running() { return isRunning; }
-	void SpawnBullet(Vector2D startPos, double angle);
+	void PlayerHit();
+	void PlayerDestroyedAShip();
+
 
 	static 	SDL_Renderer* renderer;
 	static  SDL_Event event;
@@ -32,7 +34,10 @@ public:
 	static  AssetManager* assets;
 
 private:
-
+	void Restart();
+	void StartGame();
+	void SetupAssets();
+	void CollisionDetection();
 	bool isRunning;
 	SDL_Window *window;
 };

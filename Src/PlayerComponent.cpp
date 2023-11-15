@@ -19,5 +19,9 @@ void PlayerComponent::Fire()
 
 void PlayerComponent::Collision(const ColliderComponent& collider)
 {
-	
+	if (collider.tag == "EnemyBullet")
+	{
+		collider.entity->Destroy();
+		Game::Instance->PlayerHit();
+	}
 }

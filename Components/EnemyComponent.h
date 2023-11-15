@@ -16,6 +16,7 @@ public:
 
 	void Init() override 
 	{ 
+		
 		InitLocal();
 	}
 
@@ -33,4 +34,9 @@ private:
 		TransformComponent* transform;
 		bool headingToLocation = false;
 		Vector2D targetPos;
+		float timeOfLastShot;
+		float timeToReload = 1000/2;
+		float initialDelay = 0;
+		float spawnTime = 0;
+
 };

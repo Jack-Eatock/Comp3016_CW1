@@ -9,6 +9,7 @@ Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+std::vector<ColliderComponent*> Game::colliders;
 
 auto& player(manager.AddEntity()); // Create Player Entity
 auto& player2(manager.AddEntity()); // Other Player
@@ -75,10 +76,16 @@ void Game::Update()
 	manager.Refresh();
 	manager.Update();
 
-	if (CollisionDetection::RectCollision_AABB(player.GetComponent<ColliderComponent>().collider, player2.GetComponent<ColliderComponent>().collider))
+	for (auto colider : colliders)
 	{
-		std::cout << "COLISIONS" << std::endl;
+		for (auto colider2 : colliders)
+		{
+			if (colider == colider2)
+				continue;
+			CollisionDetection::RectCollision_AABB(*colider, *colider2);
+		}
 	}
+
 }
 
 void Game::Render() 
@@ -97,4 +104,3 @@ void Game::Clean()
 	SDL_Quit();
 	std::cout << "Game Cleaned " << std::endl;
 }
-

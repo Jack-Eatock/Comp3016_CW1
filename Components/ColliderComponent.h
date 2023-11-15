@@ -12,10 +12,6 @@ public:
 
 	TransformComponent* transform;
 
-	ColliderComponent()
-	{
-	}
-
 	/// <summary>
 	/// The colliders are manually set. This is so we can have more generous colliders, so the player
 	/// does not get frustrated when a bullet only just hits them. 
@@ -33,6 +29,8 @@ public:
 			entity->AddComponent<TransformComponent>();
 
 		transform = &entity->GetComponent<TransformComponent>();
+
+		Game::colliders.push_back(this);
 	}
 	
 	void Update() override

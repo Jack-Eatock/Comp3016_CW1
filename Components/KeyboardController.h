@@ -22,8 +22,8 @@ public:
 	{
 		if (Game::event.type == SDL_MOUSEMOTION) 
 		{
-			transform->MousePos.X = Game::event.button.x;
-			transform->MousePos.Y = Game::event.button.y;
+			transform->TargetPos.X = Game::event.button.x;
+			transform->TargetPos.Y = Game::event.button.y;
 		}
 
 		// Keyboard
@@ -87,22 +87,22 @@ public:
 
 		// X axis first
 		if (left && right)
-			transform->Input.X = 0;
+			transform->MovementInput.X = 0;
 		else if (left)
-			transform->Input.X = -1;
+			transform->MovementInput.X = -1;
 		else if (right)
-			transform->Input.X = 1;
+			transform->MovementInput.X = 1;
 		else
-			transform->Input.X = 0;
+			transform->MovementInput.X = 0;
 
 		// Y axis
 		if (up && down)
-			transform->Input.Y = 0;
+			transform->MovementInput.Y = 0;
 		else if (up)
-			transform->Input.Y = -1;
+			transform->MovementInput.Y = -1;
 		else if (down)
-			transform->Input.Y = 1;
+			transform->MovementInput.Y = 1;
 		else
-			transform->Input.Y = 0;
+			transform->MovementInput.Y = 0;
 	}
 };

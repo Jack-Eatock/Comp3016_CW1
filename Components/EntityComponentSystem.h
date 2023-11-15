@@ -54,7 +54,9 @@ private:
 	std::vector<std::unique_ptr<Component>> components;
 	ComponentArray componentArray;
 	ComponentBitSet componentBitSet;
+	
 public:
+
 	void Update()
 	{
 		// Update the components of this entity.
@@ -65,6 +67,7 @@ public:
 	{
 		for (auto& c : components) { c->Draw(); }
 	}
+
 	bool IsActive() const{ return active; }
 	void Destroy() { active = false; }
 
@@ -127,6 +130,11 @@ public:
 				return !mEntity->IsActive();
 			}),
 			std::end(entities));
+	}
+
+	std::vector<std::unique_ptr<Entity>>* GetEntities() 
+	{
+		return &entities;
 	}
 
 	Entity& AddEntity() 

@@ -3,6 +3,7 @@
 #include "../Components/EntityComponentSystem.h"
 #include "../Headers/Vector2D.h"
 #include "SDL.h"
+#include "../Headers/Constants.h"
 
 class TransformComponent : public Component
 {
@@ -10,13 +11,13 @@ class TransformComponent : public Component
 public:
 	
 	double Angle;
-	Vector2D Input;
+	Vector2D MovementInput;
 	Vector2D Position;
 	Vector2D Velocity;
 	bool IsBoosting = false;
 	float TmpMaxSpeed = 0.00f;
 	double Speed = 0.00f;
-	Vector2D MousePos;
+	Vector2D TargetPos;
 
 	// Default constructor
 	TransformComponent()
@@ -39,21 +40,42 @@ public:
 
 	void Update() override
 	{
-		Vector2D normalisedInput = Input.Normalise();
+		CalculateMovement();
+		ApplyDrag();
+		
+		// Calculate the magnitude using the formula: sqrt(X^2 + Y^2 + Z^2)
+		Speed = sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
+
+		KeepWithinBounds();
+
+		Position.X += Velocity.X;
+		Position.Y += Velocity.Y;
+
+		RotateTowardsTarget();
+
+		//std::cout << "here " << Position << " a " << Speed << std::endl;
+	}
+
+	void CalculateMovement()
+	{
+		Vector2D normalisedInput = MovementInput.Normalise();
 
 		// Apply Input
 		Velocity.X = Velocity.X + (normalisedInput.X * ACCELERATION);
 		Velocity.Y = Velocity.Y + (normalisedInput.Y * ACCELERATION);
+	}
 
+	void ApplyDrag()
+	{
 		// Apply Drag
-		if (Velocity.X > 0.1) 
+		if (Velocity.X > 0.1)
 		{
 			if (Velocity.X - DRAG < 0)
 				Velocity.X = 0;
 			else
 				Velocity.X -= DRAG;
 		}
-		else if (Velocity.X < 0.1) 
+		else if (Velocity.X < 0.1)
 		{
 			if (Velocity.X + DRAG > 0)
 				Velocity.X = 0;
@@ -63,7 +85,7 @@ public:
 		else
 			Velocity.X = 0;
 
-		if (Velocity.Y > 0.1) 
+		if (Velocity.Y > 0.1)
 		{
 			if (Velocity.Y - DRAG < 0)
 				Velocity.Y = 0;
@@ -79,19 +101,17 @@ public:
 		}
 		else
 			Velocity.Y = 0;
+	}
 
-		
-		// Calculate the magnitude using the formula: sqrt(X^2 + Y^2 + Z^2)
-		Speed = sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
-
+	void KeepWithinBounds()
+	{
 		// If they go out of bounds, push them back.
-		 
 		float bounceBackSpeed = Speed + BOUNCEOFWALL;
 		if (Speed < BOUNCEOFWALL)
 			bounceBackSpeed = BOUNCEOFWALL * ACCELERATION;
 
 		// Left
-		if (Position.X < 0 )
+		if (Position.X < 0)
 			Velocity.X += bounceBackSpeed;
 
 		// Right
@@ -120,17 +140,12 @@ public:
 			Velocity.Y = normalisedVelocity.Y * TmpMaxSpeed;
 			Speed = sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
 		}
+	}
 
-		Position.X += Velocity.X;
-		Position.Y += Velocity.Y;
-
+	void RotateTowardsTarget()
+	{
 		// Calculate the angle of the ship. Look at direction from ship to mouse pos.
-		//Vector2D dif = MousePos - Position;
-
-		float radAngle = atan2(MousePos.Y - Position.Y, MousePos.X - Position.X);
+		float radAngle = atan2(TargetPos.Y - Position.Y, TargetPos.X - Position.X);
 		Angle = (radAngle * 180 / M_PI);
-
-
-		std::cout << "here " << Position << " a " << Speed << std::endl;
 	}
 };

@@ -52,7 +52,7 @@ public:
 class Entity 
 {
 private:
-
+	Manager& manager;
 
 	bool active = true;
 	std::vector<std::unique_ptr<Component>> components;
@@ -60,28 +60,18 @@ private:
 	ComponentBitSet componentBitSet;
 	
 public:
-
-	Entity() {
-		components = std::vector<std::unique_ptr<Component>>();
-	}
+	Entity(Manager& mManager) : manager(mManager) {}
 
 	void Update()
 	{
-		try
-		{
-			// Update the components of this entity.
-			for (auto& c : components) { c->Update(); }
-		}
-		catch (const std::exception&)
-		{
-				
-		}
-		
+		for (int i = 0; i < components.size(); i++)
+			components[i]->Update();
 	}
 
 	void Draw() 
 	{
-		for (auto& c : components) { c->Draw(); }
+		for (int i = 0; i < components.size(); i++)
+			components[i]->Draw();
 	}
 
 	bool IsActive() const{ return active; }
@@ -155,7 +145,7 @@ public:
 
 	Entity& AddEntity() 
 	{
-		Entity* e = new Entity(); // Create new entity.
+		Entity* e = new Entity(*this); // Create new entity.
 		std::unique_ptr<Entity> uPtr{ e }; // Pointer to new entity
 		entities.emplace_back(std::move(uPtr)); // Add new entity to the list of  entities.
 		return *e;

@@ -32,6 +32,7 @@ public:
 	static  AssetManager* assets;
 
 private:
+
 	bool isRunning;
 	SDL_Window *window;
 };

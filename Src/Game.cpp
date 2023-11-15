@@ -13,8 +13,7 @@ SDL_Event Game::event;
 std::vector<ColliderComponent*> Game::colliders;
 AssetManager* Game::assets = new AssetManager(&manager);
 
-auto& player(manager.AddEntity()); // Create Player Entity
-auto& player2(manager.AddEntity()); // Other Player
+Entity& player(manager.AddEntity()); // Create Player Entity
 
 Game::Game() {};
 Game::~Game() {}
@@ -51,6 +50,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	assets->AddTexture("PlayerShip", "Assets/UpdatedShip.png");
 	assets->AddTexture("Bullet", "Assets/FriendlyBullet.png");
+	assets->AddTexture("EnemyShip", "Assets/EnemyShip1.png");
 
 	player.AddComponent<TransformComponent>(50, 50);
 	player.AddComponent<SpriteComponent>("PlayerShip");
@@ -58,10 +58,16 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.AddComponent<ColliderComponent>(32, 32, "Player");
 	player.AddComponent<PlayerComponent>();
 
-	player2.AddComponent<TransformComponent>(400, 200);
-	player2.AddComponent<SpriteComponent>("PlayerShip");
-	player2.AddComponent<ColliderComponent>(32, 32, "Enemy");
-	player2.AddComponent<EnemyComponent>();
+	for (size_t i = 0; i < 5; i++)
+	{
+		Entity& player2 = (manager.AddEntity());
+		player2.AddComponent<TransformComponent>(100 * i, 200);
+		player2.AddComponent<SpriteComponent>("EnemyShip");
+		player2.AddComponent<ColliderComponent>(32, 32, "Enemy");
+		player2.AddComponent<EnemyComponent>();
+	}
+
+	
 }
 
 void Game::HandleEvents()

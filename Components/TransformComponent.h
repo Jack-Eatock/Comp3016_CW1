@@ -4,6 +4,7 @@
 #include "../Headers/Vector2D.h"
 #include "SDL.h"
 #include "../Headers/Constants.h"
+#include <cmath>
 
 class TransformComponent : public Component
 {
@@ -18,6 +19,11 @@ public:
 	float TmpMaxSpeed = 0.00f;
 	double Speed = 0.00f;
 	Vector2D TargetPos;
+
+	bool applyDrag = true;
+	bool keepWithinBounds = true;
+	bool rotateTowardsTarget = true;
+	bool useInput = false;
 
 	// Default constructor
 	TransformComponent()
@@ -41,17 +47,21 @@ public:
 	void Update() override
 	{
 		CalculateMovement();
-		ApplyDrag();
+
+		if (applyDrag)
+			ApplyDrag();
 		
 		// Calculate the magnitude using the formula: sqrt(X^2 + Y^2 + Z^2)
 		Speed = sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
 
-		KeepWithinBounds();
+		if (keepWithinBounds)
+			KeepWithinBounds();
 
 		Position.X += Velocity.X;
 		Position.Y += Velocity.Y;
 
-		RotateTowardsTarget();
+		if (rotateTowardsTarget)
+			RotateTowardsTarget();
 
 		//std::cout << "here " << Position << " a " << Speed << std::endl;
 	}
@@ -147,5 +157,10 @@ public:
 		// Calculate the angle of the ship. Look at direction from ship to mouse pos.
 		float radAngle = atan2(TargetPos.Y - Position.Y, TargetPos.X - Position.X);
 		Angle = (radAngle * 180 / M_PI);
+	}
+
+	float DistanceBetweenPoints(Vector2D vec1, Vector2D vec2) 
+	{
+		return (powf((powf((vec2.X - vec1.X), 2) + powf((vec2.Y - vec1.Y), 2)), 0.5));
 	}
 };

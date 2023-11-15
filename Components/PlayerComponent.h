@@ -1,11 +1,11 @@
 #pragma once
 #include "EntityComponentSystem.h"
 #include "ColliderComponent.h"
+#include "../Headers/Game.h"
 
 class PlayerComponent : public Component 
 {
 public:
-
 
 	TransformComponent* transform;
 
@@ -17,11 +17,11 @@ public:
 
 	void Update() override 
 	{
-		//// Mouse Click
-		//if (Game::event.type == SDL_MOUSEBUTTONDOWN)
-		//{
-		//	Fire();
-		//}
+		// Mouse Click
+		if (Game::event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			Fire();
+		}
 	}
 
 	void Fire();

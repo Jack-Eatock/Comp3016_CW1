@@ -6,3 +6,4 @@
 #include "ColliderComponent.h"
 #include "PlayerComponent.h"
 #include "EnemyComponent.h"
+#include "BulletComponent.h"

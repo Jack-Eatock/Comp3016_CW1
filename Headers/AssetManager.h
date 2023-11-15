@@ -12,6 +12,8 @@ public:
 	AssetManager(Manager* manager);
 	~AssetManager();
 	void AddTexture(std::string id, const char* path);
+
+	void SpawnBullet(Vector2D startPos, int range, int speed, std::string id, Vector2D direction);
 	SDL_Texture* GetTexture(std::string id);
 private:
 

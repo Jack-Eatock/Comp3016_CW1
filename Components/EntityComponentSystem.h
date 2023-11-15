@@ -18,17 +18,17 @@ class Manager;
 
 using ComponentID = std::size_t;
 
-inline ComponentID GetComponentTypeID()
+inline ComponentID GetNewComponentTypeID()
 {
 	// This will iterate every time it is called. So each has a unique ID.
-	static ComponentID lastID = 0;
+	static ComponentID lastID = 0u;
 	return lastID++;
 }
 
-
 template <typename T> inline ComponentID GetComponentTypeID() noexcept 
 {
-	static ComponentID typeID = GetComponentTypeID();
+	static_assert (std::is_base_of<Component, T>::value, "");
+	static ComponentID typeID = GetNewComponentTypeID();
 	return typeID;
 }
 
@@ -52,6 +52,8 @@ public:
 class Entity 
 {
 private:
+
+
 	bool active = true;
 	std::vector<std::unique_ptr<Component>> components;
 	ComponentArray componentArray;
@@ -59,10 +61,21 @@ private:
 	
 public:
 
+	Entity() {
+		components = std::vector<std::unique_ptr<Component>>();
+	}
+
 	void Update()
 	{
-		// Update the components of this entity.
-		for (auto& c : components) { c->Update(); }
+		try
+		{
+			// Update the components of this entity.
+			for (auto& c : components) { c->Update(); }
+		}
+		catch (const std::exception&)
+		{
+				
+		}
 		
 	}
 
@@ -113,22 +126,22 @@ public:
 	void Update() 
 	{
 		// Update all entities
-		for (auto& e : entities)
-			e->Update();
+		for (int i = 0; i < entities.size(); i++)
+			entities[i]->Update();
 	}
 
 	void Draw() 
 	{
 		// Draw all entities
-		for (auto& e : entities)
-			e->Draw();
+		for (int i = 0; i < entities.size(); i++)
+			entities[i]->Draw();
 	}
 
 	void Refresh() 
 	{
 		// Erase all entities that are inactive.
 		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
-			[](const std::unique_ptr<Entity>& mEntity)
+			[](const std::unique_ptr<Entity> &mEntity)
 			{
 				return !mEntity->IsActive();
 			}),

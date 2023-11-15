@@ -50,6 +50,7 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "[ERROR] Subsystems failed to Initialise!" << std::endl;
 
 	assets->AddTexture("PlayerShip", "Assets/UpdatedShip.png");
+	assets->AddTexture("Bullet", "Assets/FriendlyBullet.png");
 
 	player.AddComponent<TransformComponent>(50, 50);
 	player.AddComponent<SpriteComponent>("PlayerShip");
@@ -112,7 +113,4 @@ void Game::Clean()
 	std::cout << "Game Cleaned " << std::endl;
 }
 
-void Game::SpawnBullet(Vector2D startPos, double angle) 
-{
-	std::cout << "Game Cleaned " << std::endl;
-}
+

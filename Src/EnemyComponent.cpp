@@ -6,8 +6,6 @@
 
 void EnemyComponent::Collision(const ColliderComponent& collider)
 {
-	//std::cout << "bbb" << std::endl;
-
 	if (collider.tag == "FriendlyBullet")
 	{
 		entity->Destroy();
@@ -17,8 +15,6 @@ void EnemyComponent::Collision(const ColliderComponent& collider)
 
 void EnemyComponent::UpdateLocal()
 {
-	std::cout << id << std::endl;
-
 	if (headingToLocation) {
 
 		// Have they reached the location?
@@ -69,9 +65,5 @@ void EnemyComponent::InitLocal()
 {
 	std::mt19937 gen{ seed() }; // seed the generator
 
-	std::uniform_int_distribution<> dist{ 30, WINDOW_WIDTH - 30 };
-	int randX = dist(gen);
-	id = randX;
 	transform = &entity->GetComponent<TransformComponent>();
-	std::cout << id << "init" << std::endl;
 }

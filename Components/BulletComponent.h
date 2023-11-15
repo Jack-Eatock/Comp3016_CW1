@@ -32,7 +32,7 @@ public:
 	void Update() override 
 	{
 		distance = transform->DistanceBetweenPoints(transform->Position, startPos);
-		std::cout << "Dis" << distance << std::endl;
+		//std::cout << "Dis" << distance << std::endl;
 
 		Vector2D velocity = direction;
 		velocity.Multiply(Vector2D(speed, speed));

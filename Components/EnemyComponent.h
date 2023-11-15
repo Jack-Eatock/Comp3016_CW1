@@ -31,5 +31,4 @@ private:
 		TransformComponent* transform;
 		bool headingToLocation = false;
 		Vector2D targetPos;
-		int id = 0;
 };

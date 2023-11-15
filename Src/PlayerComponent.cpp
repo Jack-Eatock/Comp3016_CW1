@@ -5,7 +5,6 @@
 
 void PlayerComponent::Fire()
 {
-	std::cout << "Bang" << std::endl;
 	std::string spriteId = "Bullet";
 	std::string colliderId = "FriendlyBullet";
 	Vector2D direction = transform->TargetPos;
@@ -20,6 +19,5 @@ void PlayerComponent::Fire()
 
 void PlayerComponent::Collision(const ColliderComponent& collider)
 {
-	std::cout << "AAAAA" << std::endl;
 	
 }

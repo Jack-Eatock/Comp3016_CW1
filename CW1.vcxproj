@@ -136,13 +136,16 @@
   <ItemGroup>
     <ClCompile Include="Src\CollisionDetection.cpp" />
     <ClCompile Include="Src\CW1.cpp" />
+    <ClCompile Include="Src\EnemyComponent.cpp" />
     <ClCompile Include="Src\Game.cpp" />
+    <ClCompile Include="Src\PlayerComponent.cpp" />
     <ClCompile Include="Src\TextureManager.cpp" />
     <ClCompile Include="Src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\ColliderComponent.h" />
-    <ClInclude Include="Components\PlayerController.h" />
+    <ClInclude Include="Components\EnemyComponent.h" />
+    <ClInclude Include="Components\PlayerComponent.h" />
     <ClInclude Include="Headers\CollisionDetection.h" />
     <ClInclude Include="Components\Components.h" />
     <ClInclude Include="Components\TransformComponent.h" />

@@ -49,10 +49,12 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>(32, 32, "Player");
+	player.AddComponent<PlayerComponent>();
 
 	player2.AddComponent<TransformComponent>(400, 200);
 	player2.AddComponent<SpriteComponent>("Assets/UpdatedShip.png");
-	player2.AddComponent<ColliderComponent>(32, 32, "Bullet");
+	player2.AddComponent<ColliderComponent>(32, 32, "Enemy");
+	player2.AddComponent<EnemyComponent>();
 	
 }
 
@@ -71,21 +73,21 @@ void Game::HandleEvents()
 	}
 }
 
-void Game::Update() 
+void Game::Update()
 {
 	manager.Refresh();
 	manager.Update();
 
-	for (auto colider : colliders)
+	for (auto colider : Game::colliders)
 	{
-		for (auto colider2 : colliders)
+		for (auto colider2 : Game::colliders)
 		{
 			if (colider == colider2)
 				continue;
+
 			CollisionDetection::RectCollision_AABB(*colider, *colider2);
 		}
 	}
-
 }
 
 void Game::Render() 

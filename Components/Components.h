@@ -4,3 +4,5 @@
 #include "SpriteComponent.h"
 #include "KeyboardController.h"
 #include "ColliderComponent.h"
+#include "PlayerComponent.h"
+#include "EnemyComponent.h"

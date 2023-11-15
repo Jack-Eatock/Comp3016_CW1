@@ -4,7 +4,7 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\Spr
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(51,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(25,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(26,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(83,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(84,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int

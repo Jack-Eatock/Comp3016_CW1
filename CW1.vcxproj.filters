@@ -30,6 +30,12 @@
     <ClCompile Include="Src\CollisionDetection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\PlayerComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\EnemyComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Constants.h">
@@ -65,7 +71,10 @@
     <ClInclude Include="Headers\CollisionDetection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\PlayerController.h">
+    <ClInclude Include="Components\PlayerComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\EnemyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

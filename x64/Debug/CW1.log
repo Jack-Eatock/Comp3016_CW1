@@ -1,4 +1,4 @@
-﻿  AssetManager.cpp
+﻿  Game.cpp
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(120,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(52,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(53,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
@@ -14,94 +14,23 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiL
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  CollisionDetection.cpp
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(120,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(52,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(53,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(23,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(24,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(34,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(19,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(20,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  EnemyComponent.cpp
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(120,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(52,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(53,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(23,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(24,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(34,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(19,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(20,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\EnemyComponent.cpp(37,32): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\EnemyComponent.cpp(47,31): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\EnemyComponent.cpp(107,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\EnemyComponent.cpp(107,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\EnemyComponent.cpp(124,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\EnemyComponent.cpp(127,26): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-  Game.cpp
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(120,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(52,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(53,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(23,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(24,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(34,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(19,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(20,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(251,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(371,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(391,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(253,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(373,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(394,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(90,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(89,16): message : see reference to function template instantiation 'T &Entity::AddComponent<UiLabel,Vector2D,const char(&)[8],const char(&)[10],SDL_Color&,int,bool>(Vector2D &&,const char (&)[8],const char (&)[10],SDL_Color &,int &&,bool &&)' being compiled
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(91,16): message : see reference to function template instantiation 'T &Entity::AddComponent<UiLabel,Vector2D,const char(&)[8],const char(&)[10],SDL_Color&,int,bool>(Vector2D &&,const char (&)[8],const char (&)[10],SDL_Color &,int &&,bool &&)' being compiled
           with
           [
               T=UiLabel
           ]
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(90,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(165,10): message : see reference to function template instantiation 'T &Entity::AddComponent<TransformComponent,int&,int&>(int &,int &)' being compiled
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(167,10): message : see reference to function template instantiation 'T &Entity::AddComponent<TransformComponent,int&,int&>(int &,int &)' being compiled
           with
           [
               T=TransformComponent
           ]
-  PlayerComponent.cpp
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(120,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(52,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(53,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(23,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\KeyboardController.h(24,47): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(34,46): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\BulletComponent.h(38,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(19,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(20,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(29,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
   CW1.vcxproj -> C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\x64\Debug\CW1.exe

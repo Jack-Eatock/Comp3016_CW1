@@ -43,8 +43,6 @@ public:
 	void Draw() override  
 	{
 		SDL_RenderCopy(Game::renderer, textTexture, nullptr, &position);
-
-		std::cout << "TEst" << position.w << std::endl;
 	}
 
 private:

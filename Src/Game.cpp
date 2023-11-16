@@ -75,6 +75,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	if (TTF_Init() == -1)
 		std::cout << "[ERROR] TTF failed to Initialise!" << std::endl;
+	else
+		std::cout << "TTF Initialised!" << std::endl;
 
 	intro = true;
 	menuScreen = true;
@@ -390,7 +392,6 @@ void Game::PlayerDied()
 	captainKIA = true;
 	restarting = true;
 	timeOfRestarting = SDL_GetTicks();
-
 }
 
 void Game::NewCharacter()

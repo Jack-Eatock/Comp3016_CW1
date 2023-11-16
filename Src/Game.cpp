@@ -327,7 +327,7 @@ void Game::IntroUpdate()
 	ss2 << "Press [Space] to continue";
 
 	// Top text
-	ss3 << "The Resiliance of Mankind";
+	ss3 << "The Resilience of Mankind";
 	
 	if (introPhase == 9)
 	{

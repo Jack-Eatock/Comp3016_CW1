@@ -4,6 +4,7 @@
 #include "../Headers/CollisionDetection.h"
 #include "../Headers/AssetManager.h"
 #include "../Components/Components.h"
+#include <sstream>
 
 Manager manager;
 Game* Game::Instance;
@@ -23,6 +24,8 @@ bool restarting = false;
 
 float timeOfRestarting = 0;
 float timeBeforeRestarting = 2 * 1000;
+
+Entity* pointDisplayer;
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -54,9 +57,20 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "[ERROR] Subsystems failed to Initialise!" << std::endl;
 
+	if (TTF_Init() == -1)
+		std::cout << "[ERROR] TTF failed to Initialise!" << std::endl;
+
 	SetupAssets();
 	StartGame();
 }
+
+void Game::SetupText() 
+{
+	pointDisplayer = &manager.AddEntity();
+	SDL_Color white = { 255,255,255,255 };
+	pointDisplayer->AddComponent<UiLabel>(Vector2D(20, 20), "Example", "PixelFont", white);
+}
+
 
 void Game::SetupAssets()
 {
@@ -77,19 +91,21 @@ void Game::SetupAssets()
 	assets->AddTexture("EnemyBullet", "Assets/EnemyBullet.png");
 
 	// Background
-	backgroundSurface = IMG_Load("Assets/Background.png");
-	backgroundTexture = SDL_CreateTextureFromSurface(Game::renderer, backgroundSurface);
-	SDL_FreeSurface(backgroundSurface);
+	backgroundTexture = TextureManager::LoadTexture("Assets/Background.png");
 	backgroundRect.x = 0;
 	backgroundRect.y = 0;
 	backgroundRect.w = WINDOW_WIDTH;
 	backgroundRect.h = WINDOW_HEIGHT;
 	backgroundDest.w = backgroundRect.w;
 	backgroundDest.h = backgroundRect.h;
+
+	// Point displayer
+	assets->AddFont("PixelFont", "Assets/Fonts/coure.fon", 32);
 }
 
 void Game::StartGame()
 {
+	SetupText();
 	Entity& player1 = manager.AddEntity(); // Create Player Entity
 	player1.AddComponent<TransformComponent>(50, 50);
 	player1.AddComponent<SpriteComponent>("FriendlyShip");
@@ -97,7 +113,7 @@ void Game::StartGame()
 	player1.AddComponent<ColliderComponent>(32, 32, "Player");
 	player1.AddComponent<PlayerComponent>();
 
-	for (size_t i = 0; i < 1; i++)
+	for (size_t i = 0; i < 3; i++)
 	{
 		Entity& player2 = (manager.AddEntity());
 		player2.AddComponent<TransformComponent>(100 * i, 200);
@@ -106,7 +122,6 @@ void Game::StartGame()
 		player2.AddComponent<EnemyComponent>();
 	}
 }
-
 
 void Game::HandleEvents()
 {
@@ -128,7 +143,11 @@ void Game::Update()
 	manager.Refresh();
 	manager.Update();
 	CollisionDetection();
-	
+
+	std::stringstream ss;
+	ss << "Points: " << points;
+	pointDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFont");
+
 	// Are we restarting?
 	if (restarting)
 	{
@@ -144,10 +163,14 @@ void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	// background
+	// Draw the background first so it on the bottom.
 	SDL_RenderCopy(Game::renderer, backgroundTexture, &backgroundRect, &backgroundDest);
 
+	// Draw the game content. All entities
 	manager.Draw();
+
+	// Draw the text last so it is on top!
+	pointDisplayer->Draw();
 
 	SDL_RenderPresent(renderer);
 }
@@ -169,6 +192,7 @@ void Game::Restart()
 {
 	colliders.clear();
 	manager.DestroyAllEntities();
+
 	StartGame();
 }
 

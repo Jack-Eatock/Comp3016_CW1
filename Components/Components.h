@@ -7,3 +7,4 @@
 #include "PlayerComponent.h"
 #include "EnemyComponent.h"
 #include "BulletComponent.h"
+#include "UiLabel.h"

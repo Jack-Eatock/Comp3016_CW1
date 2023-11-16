@@ -37,6 +37,7 @@ private:
 	void Restart();
 	void StartGame();
 	void SetupAssets();
+	void SetupText();
 	void CollisionDetection();
 	bool isRunning;
 	SDL_Window *window;

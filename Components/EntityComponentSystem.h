@@ -152,7 +152,7 @@ public:
 
 	Entity& GetEntity()
 	{
-		return *entities[0];
+		return *entities[1];
 	}
 
 	void DestroyAllEntities()

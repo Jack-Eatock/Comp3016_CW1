@@ -9,6 +9,9 @@ void PlayerComponent::Fire()
 	if (destroyed)
 		return;
 
+	if (SDL_GetTicks() - timeOfLastShot < timeToReload)
+		return;
+
 	std::string spriteId = "Bullet";
 	std::string colliderId = "FriendlyBullet";
 	Vector2D direction = transform->TargetPos;

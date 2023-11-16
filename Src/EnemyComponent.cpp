@@ -68,7 +68,6 @@ void EnemyComponent::UpdateLocal()
 		}
 		return;
 	}
-	
 
 	//std::cout << "AA " << initialDelay - spawnTime << std::endl;
 	if (SDL_GetTicks() >  spawnTime + initialDelay ) {

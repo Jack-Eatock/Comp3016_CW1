@@ -108,13 +108,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2_image-2.6.3\include;C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2_ttf-2.20.2\include;C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2_image-2.6.3\include;C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2_image-2.6.3\lib\x64;C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2_ttf-2.20.2\lib\x64;C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2_image-2.6.3\lib\x64;C:\Users\jacke\Documents\University\Comp3016\CW1\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,6 +148,7 @@
     <ClInclude Include="Components\ColliderComponent.h" />
     <ClInclude Include="Components\EnemyComponent.h" />
     <ClInclude Include="Components\PlayerComponent.h" />
+    <ClInclude Include="Components\UiLabel.h" />
     <ClInclude Include="Headers\AssetManager.h" />
     <ClInclude Include="Headers\CollisionDetection.h" />
     <ClInclude Include="Components\Components.h" />

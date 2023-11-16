@@ -14,7 +14,6 @@ public:
 		transform = &entity->GetComponent<TransformComponent>();
 	}
 
-
 	void Update() override 
 	{
 		// Mouse Click
@@ -31,4 +30,6 @@ public:
 private:
 	int health = 3;
 	bool destroyed = false;
+	float timeOfLastShot;
+	float timeToReload = 1000 / 3;
 };

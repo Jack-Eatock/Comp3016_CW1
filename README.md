@@ -16,6 +16,10 @@ Download the Repository, open x64 -> Debug and run "CW1.exe". Or alternatively i
 - Mouse Left Click - Fires a bullet from your ship.
 - Spacebar - [Ui Only], progresses through menu's
 
+### USP
+In "The Resilience of Mankind" you experience the events being told through many different character's perspectives. You fly a spaceship, avoid enemy fire and strategically time your shots to be victorious. 
+The game plays like an arcade machine, challenging the player to reach further and further every time they play. Although at first, the game is challenging, you will quickly learn and master the uniquely satisfying mechanics. 
+
 ### Links
 - [Github Repository](https://github.com/Jack-Eatock/Comp3016_CW1)
 - [Video Demonstration](https://github.com/Jack-Eatock/Comp3016_CW1)

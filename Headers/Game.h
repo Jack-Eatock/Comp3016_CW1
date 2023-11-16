@@ -40,6 +40,10 @@ private:
 	void StartNextWave();
 	void SetupAssets();
 	void SetupText();
+	void IntroUpdate();
+	void MenuUpdate();
+	void GameUpdate();
+	void NewCharacter();
 	void CollisionDetection();
 	bool isRunning;
 	SDL_Window *window;

@@ -27,9 +27,9 @@ public:
 
 	void Collision(const ColliderComponent& collider);
 
+	bool destroyed = false;
 private:
 	int health = 3;
-	bool destroyed = false;
 	float timeOfLastShot;
 	float timeToReload = 1000 / 3;
 };

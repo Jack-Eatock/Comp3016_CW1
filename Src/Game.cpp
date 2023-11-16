@@ -17,7 +17,12 @@ SDL_Rect backgroundRect, backgroundDest;
 Game::Game() {};
 Game::~Game() {}
 
-int playerHealth = 3;
+// Current Playthrough
+int points = 0;
+bool restarting = false;
+
+float timeOfRestarting = 0;
+float timeBeforeRestarting = 2 * 1000;
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -55,9 +60,20 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::SetupAssets()
 {
-	assets->AddTexture("PlayerShip", "Assets/UpdatedShip.png");
+	// Friendly Ship
+	assets->AddTexture("FriendlyShip", "Assets/FriendlyShip/FriendlyShip.png");
+	assets->AddTexture("FriendlyShip_DMG1", "Assets/FriendlyShip/FriendlyShip_DMG1.png");
+	assets->AddTexture("FriendlyShip_DMG2", "Assets/FriendlyShip/FriendlyShip_DMG2.png");
+	assets->AddTexture("FriendlyShip_DMG3", "Assets/FriendlyShip/FriendlyShip_DMG3.png");
+
+	// Enemy Ship
+	assets->AddTexture("EnemyShip", "Assets/EnemyShip/EnemyShip.png");
+	assets->AddTexture("EnemyShip_DMG1", "Assets/EnemyShip/EnemyShip_DMG1.png");
+	assets->AddTexture("EnemyShip_DMG2", "Assets/EnemyShip/EnemyShip_DMG2.png");
+	assets->AddTexture("EnemyShip_DMG3", "Assets/EnemyShip/EnemyShip_DMG3.png");
+
+	// Projectiles
 	assets->AddTexture("Bullet", "Assets/FriendlyBullet.png");
-	assets->AddTexture("EnemyShip", "Assets/EnemyShip1.png");
 	assets->AddTexture("EnemyBullet", "Assets/EnemyBullet.png");
 
 	// Background
@@ -74,16 +90,14 @@ void Game::SetupAssets()
 
 void Game::StartGame()
 {
-	
-
 	Entity& player1 = manager.AddEntity(); // Create Player Entity
 	player1.AddComponent<TransformComponent>(50, 50);
-	player1.AddComponent<SpriteComponent>("PlayerShip");
+	player1.AddComponent<SpriteComponent>("FriendlyShip");
 	player1.AddComponent<KeyboardController>();
 	player1.AddComponent<ColliderComponent>(32, 32, "Player");
 	player1.AddComponent<PlayerComponent>();
 
-	for (size_t i = 0; i < 6; i++)
+	for (size_t i = 0; i < 1; i++)
 	{
 		Entity& player2 = (manager.AddEntity());
 		player2.AddComponent<TransformComponent>(100 * i, 200);
@@ -115,9 +129,18 @@ void Game::Update()
 	manager.Update();
 	CollisionDetection();
 	
+	// Are we restarting?
+	if (restarting)
+	{
+		if (SDL_GetTicks() - timeOfRestarting > timeBeforeRestarting)
+		{
+			restarting = false;
+			Restart();
+		}
+	}
 }
 
-void Game::Render() 
+void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
@@ -127,7 +150,7 @@ void Game::Render()
 	manager.Draw();
 
 	SDL_RenderPresent(renderer);
-
+}
 
 void Game::Clean() 
 {
@@ -139,29 +162,25 @@ void Game::Clean()
 
 void Game::PlayerDestroyedAShip()
 {
-
+	points += 10;
 }
 
 void Game::Restart()
 {
-	playerHealth = 3;
 	colliders.clear();
 	manager.DestroyAllEntities();
-
-	SDL_Delay(1000);
-
 	StartGame();
 }
 
-void Game::PlayerHit()
+void Game::PlayerDied()
 {
-	playerHealth--;
-	if (playerHealth <= 0) 
-	{
-		std::cout << "Player Died!" << std::endl;
-		Restart();
-	}
-		
+	if (restarting)
+		return;
+
+	std::cout << "Player Died!" << std::endl;
+	restarting = true;
+	timeOfRestarting = SDL_GetTicks();
+
 }
 
 void Game::CollisionDetection()

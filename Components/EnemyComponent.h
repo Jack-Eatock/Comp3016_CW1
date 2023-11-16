@@ -38,5 +38,9 @@ private:
 		float timeToReload = 1000/2;
 		float initialDelay = 0;
 		float spawnTime = 0;
+		int health = 3;
+		bool destroyed = false;
+		float timeOfDestroy = 0;
+		float timeUntilDespawn = 3 * 1000;
 
 };

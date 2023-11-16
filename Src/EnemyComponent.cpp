@@ -8,10 +8,34 @@
 
 void EnemyComponent::Collision(const ColliderComponent& collider)
 {
+	if (destroyed)
+		return;
+
 	if (collider.tag == "FriendlyBullet")
 	{
-		entity->Destroy();
 		collider.entity->Destroy();
+		health--;
+
+		// Switch visual
+		if (health == 2)
+			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG1");
+
+		else if (health == 1)
+			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG2");
+
+		else if (health <= 0)
+			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG3");
+
+		if (health <= 0)
+		{
+			TransformComponent* transform = &entity->GetComponent<TransformComponent>();
+			transform->useInput = false;
+			transform->rotateTowardsTarget = false;
+			Game::Instance->PlayerDestroyedAShip();
+
+			destroyed = true;
+			timeOfDestroy = SDL_GetTicks();
+		}
 	}
 }
 
@@ -36,6 +60,16 @@ void EnemyComponent::Fire()
 
 void EnemyComponent::UpdateLocal()
 {
+	if (destroyed) 
+	{
+		if (SDL_GetTicks() - timeOfDestroy > timeUntilDespawn) 
+		{
+			entity->Destroy();
+		}
+		return;
+	}
+	
+
 	//std::cout << "AA " << initialDelay - spawnTime << std::endl;
 	if (SDL_GetTicks() >  spawnTime + initialDelay ) {
 		Fire();

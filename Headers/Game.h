@@ -24,7 +24,7 @@ public:
 	void Render();
 	void Clean();
 	bool Running() { return isRunning; }
-	void PlayerHit();
+	void PlayerDied();
 	void PlayerDestroyedAShip();
 
 

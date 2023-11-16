@@ -23,7 +23,7 @@ public:
 	bool applyDrag = true;
 	bool keepWithinBounds = true;
 	bool rotateTowardsTarget = true;
-	bool useInput = false;
+	bool useInput = true;
 
 	// Default constructor
 	TransformComponent()
@@ -46,7 +46,8 @@ public:
 
 	void Update() override
 	{
-		CalculateMovement();
+		if (useInput)
+			CalculateMovement();
 
 		if (applyDrag)
 			ApplyDrag();

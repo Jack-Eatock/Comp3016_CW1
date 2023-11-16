@@ -27,4 +27,8 @@ public:
 	void Fire();
 
 	void Collision(const ColliderComponent& collider);
+
+private:
+	int health = 3;
+	bool destroyed = false;
 };

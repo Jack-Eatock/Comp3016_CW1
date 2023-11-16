@@ -70,7 +70,7 @@ void EnemyComponent::UpdateLocal()
 		return;
 	}
 
-	// How frequently should the ai try to shoot
+	// Adds a delay to the ships first shot. 
 	if (SDL_GetTicks() >  spawnTime + initialDelay ) {
 		Fire();
 	}
@@ -118,10 +118,9 @@ void EnemyComponent::UpdateLocal()
 void EnemyComponent::InitLocal()
 {
 	std::mt19937 gen{ seed() }; // seed the generator
-	std::uniform_int_distribution<> dist6{ 0, 4};
+	std::uniform_int_distribution<> dist6{ 1, 6};
 	
 	initialDelay = dist6(gen) * 1000;
-	std::cout << "AA " << initialDelay << std::endl;
 	transform = &entity->GetComponent<TransformComponent>();
 	spawnTime = SDL_GetTicks();
 }

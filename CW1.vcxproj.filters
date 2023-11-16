@@ -39,6 +39,9 @@
     <ClCompile Include="Src\AssetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Constants.h">
@@ -89,5 +92,12 @@
     <ClInclude Include="Components\UiLabel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\DataManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Data\Names.txt" />
+    <Text Include="Assets\Data\IntroStory.txt" />
   </ItemGroup>
 </Project>

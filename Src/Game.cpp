@@ -6,8 +6,10 @@
 #include "../Components/Components.h"
 #include <sstream>
 #include <random>
+#include "../Headers/DataManager.h"
 
 Manager manager;
+DataManager dataManager;
 Game* Game::Instance;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -34,7 +36,7 @@ std::random_device seed;
 bool menuScreen = true;
 bool intro = true;
 int phase = 1;
-int introPhase = -1;
+int introPhase = 0;
 int shipsDestroyed = 0;
 std::string characterName = "Captain Cheggs";
 std::string lastCharacterName = "";
@@ -77,6 +79,9 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "[ERROR] TTF failed to Initialise!" << std::endl;
 	else
 		std::cout << "TTF Initialised!" << std::endl;
+
+	dataManager.GetNames();
+	dataManager.GetIntroStory();
 
 	intro = true;
 	menuScreen = true;
@@ -264,40 +269,24 @@ void Game::IntroUpdate()
 
 	// Top text
 	ss3 << "The Resiliance of Mankind";
-
-	if (introPhase == -1)
-		ss << "This story is told by 'Jerlich', a father from the species 'Jerayah' " << std::endl;
-
-	if (introPhase == 0)
-		ss << "'Happy rememberance day son! Ah what a great day. Actually.. now I think of it, i've never told you the reason for why we celebrate it so highly!'" << std::endl;
-
-	else if (introPhase == 1)
-		ss << "'It marks the day, centuries ago, that the federation was finally able to eradicate the 'Gurk' horde'";
-
-	else if (introPhase == 2)
-		ss << "'But more importantly, it honours the great sacrafice a species known as the 'Human Kind' gifted us. ";
-
-	else if (introPhase == 3)
-		ss << "'Before life was even able to comprehend the horrors of the 'Gurk's existence. The human's were the most powerfull species known. They boasted a fleet larger than three species combined and an economy twice as strong as the next highest! To be honest, at that time they were not the most.. liked, with their unusual culture and concerning urge to expand at a rapid rate.";
-
-	else if (introPhase == 4)
-		ss << "'On the 18th of June in the year 2168, all comms to earth, their capital, and various other planets and ships were lost in a matter of hours.' ";
-
-	else if (introPhase == 5)
-		ss << "'At the time we were confused in why the humans had suddenly gone so quiet. They were usually bothering us 24/7 on crazy things like.. ugh 'Recycling' and other rubbish. No pun intended.' ";
-
-	else if (introPhase == 6)
-		ss << "'22nd of June, an entire 4 days later, we finally recieved communication from the Humans. Only one string of text was recieved, that went as follows: '22/06/2168. All Human occupied planets have been invaded simultaneously. Zero succesfull resistances, survivors are being evacuated. The fleet has suffered excruciating loses. Their armour appears inpenetrable.' - President Eatock of Earth  ";
-
-	else if (introPhase == 7)
-		ss << "'Which was later followed by '24/06/2168. The enemies armour is immune to all energy weapons, however kinetic works efficiently. We have lost over 70% of our fleet and all occupied territories. They appear to have made every planet inhabitable, destroying most. We are unsure why they are here, but are certain their only purpose is to devour everything in their path. We, the remaining Human resistance shall hold the borders to the last being. We will not let this infection spread out of our teritory. The kinetic weapon discovery will give us a fighting chance, but not enough to win. Use the time we give you to build a fleet and destroy this threat. We pray for you all. - Commander Jefferson. ' ";
-
-	else if (introPhase == 8)
-		ss << "'They did exactly as they said. They held those borders to the very last ship. Here, let me read some of the logs from some commanders who were apart of the Human resistance..'";
-
-	else if (introPhase == 9)
+	
+	if (introPhase == 9)
 	{
 		intro = false;
+	}
+	else 
+	{
+		std::string textToDisplay = "";
+		try
+		{
+			// Displays the intro lines, grabbed from the intro lines text folder.
+			textToDisplay = dataManager.IntroLines[introPhase];
+		}
+		catch (const std::exception&)
+		{
+			std::cout << "[ERROR] Failed to parse intro line " << introPhase;
+		}
+		ss << textToDisplay;
 	}
 	
 	storyDisplayer3->GetComponent<UiLabel>().SetLabelText(ss3.str(), "PixelFontBig");

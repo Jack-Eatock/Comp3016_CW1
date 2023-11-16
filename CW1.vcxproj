@@ -137,6 +137,7 @@
     <ClCompile Include="Src\AssetManager.cpp" />
     <ClCompile Include="Src\CollisionDetection.cpp" />
     <ClCompile Include="Src\CW1.cpp" />
+    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="Src\EnemyComponent.cpp" />
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\PlayerComponent.cpp" />
@@ -156,10 +157,15 @@
     <ClInclude Include="Components\SpriteComponent.h" />
     <ClInclude Include="Headers\Constants.h" />
     <ClInclude Include="Components\EntityComponentSystem.h" />
+    <ClInclude Include="Headers\DataManager.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Components\KeyboardController.h" />
     <ClInclude Include="Headers\TextureManager.h" />
     <ClInclude Include="Headers\Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Data\IntroStory.txt" />
+    <Text Include="Assets\Data\Names.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

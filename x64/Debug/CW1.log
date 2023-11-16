@@ -1,4 +1,5 @@
-﻿  Game.cpp
+﻿  CW1.cpp
+  Game.cpp
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\TransformComponent.h(120,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(52,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\SpriteComponent.h(53,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
@@ -14,24 +15,25 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiL
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(238,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(257,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(377,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(398,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(243,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(262,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(367,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(388,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(90,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(91,16): message : see reference to function template instantiation 'T &Entity::AddComponent<UiLabel,Vector2D,const char(&)[8],const char(&)[10],SDL_Color&,int,bool>(Vector2D &&,const char (&)[8],const char (&)[10],SDL_Color &,int &&,bool &&)' being compiled
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(96,16): message : see reference to function template instantiation 'T &Entity::AddComponent<UiLabel,Vector2D,const char(&)[8],const char(&)[10],SDL_Color&,int,bool>(Vector2D &&,const char (&)[8],const char (&)[10],SDL_Color &,int &&,bool &&)' being compiled
           with
           [
               T=UiLabel
           ]
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(90,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(167,10): message : see reference to function template instantiation 'T &Entity::AddComponent<TransformComponent,int&,int&>(int &,int &)' being compiled
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(172,10): message : see reference to function template instantiation 'T &Entity::AddComponent<TransformComponent,int&,int&>(int &,int &)' being compiled
           with
           [
               T=TransformComponent
           ]
+  Generating Code...
   CW1.vcxproj -> C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\x64\Debug\CW1.exe

@@ -22,7 +22,6 @@ AssetManager::~AssetManager()
 /// <param name="direction">What direction should it fire?</param>
 void AssetManager::SpawnBullet(Vector2D startPos, int range, int speed, std::string spriteId, std::string colliderId, Vector2D direction)
 {
-	std::cout << "Game Cleaned " << std::endl;
 	auto& bullet(manager->AddEntity());
 	bullet.AddComponent<TransformComponent>().Position = startPos;
 	bullet.AddComponent<SpriteComponent>(spriteId);

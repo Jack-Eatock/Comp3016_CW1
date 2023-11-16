@@ -20,8 +20,6 @@ bool CollisionDetection::RectCollision_AABB(const ColliderComponent& colA, const
 {
 	if (RectCollision_AABB(colA.collider, colB.collider))
 	{
-		//std::cout << colA.tag << " hit : " << colB.tag << std::endl;
-		
 		if (colA.tag == "Player")
 		{
 			// The player has collided with something. Inform the player of the collision.

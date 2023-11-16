@@ -8,6 +8,7 @@
 
 class ColliderComponent;
 class AssetManager;
+class Entity;
 
 class Game
 {
@@ -26,7 +27,7 @@ public:
 	bool Running() { return isRunning; }
 	void PlayerDied();
 	void PlayerDestroyedAShip();
-
+	Entity* Player;
 
 	static 	SDL_Renderer* renderer;
 	static  SDL_Event event;
@@ -36,11 +37,13 @@ public:
 private:
 	void Restart();
 	void StartGame();
+	void StartNextWave();
 	void SetupAssets();
 	void SetupText();
 	void CollisionDetection();
 	bool isRunning;
 	SDL_Window *window;
+
 };
 
 

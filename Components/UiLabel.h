@@ -12,8 +12,8 @@
 class UiLabel : public Component
 {
 public:
-	UiLabel(Vector2D pos, std::string text , std::string font, SDL_Color& colour) :
-		labelText(text), labelFont(font), textColour(colour)
+	UiLabel(Vector2D pos, std::string text , std::string font, SDL_Color& colour, float _width) :
+		labelText(text), labelFont(font), textColour(colour), width(_width)
 	{
 		position.x = pos.X;
 		position.y = pos.Y;
@@ -24,7 +24,8 @@ public:
 
 	void SetLabelText(std::string text, std::string font)
 	{
-		SDL_Surface* surface = TTF_RenderText_Blended(Game::assets->GetFont(font), text.c_str(), textColour);
+		std::cout << "TEst" << std::endl;
+		SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(Game::assets->GetFont(font), text.c_str(), textColour, width);
 		textTexture = SDL_CreateTextureFromSurface(Game::renderer, surface);
 		SDL_FreeSurface(surface);
 		SDL_QueryTexture(textTexture, nullptr, nullptr, &position.w, &position.h); // Copies width and height from the texture.
@@ -41,4 +42,5 @@ private:
 	std::string labelFont;
 	SDL_Color textColour;
 	SDL_Texture* textTexture;
+	float width;
 };

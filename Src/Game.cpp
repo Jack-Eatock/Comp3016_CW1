@@ -19,13 +19,20 @@ Game::Game() {};
 Game::~Game() {}
 
 // Current Playthrough
-int points = 0;
 bool restarting = false;
 
 float timeOfRestarting = 0;
 float timeBeforeRestarting = 2 * 1000;
 
+Entity* Player;
 Entity* pointDisplayer;
+Entity* storyDisplayer;
+
+bool menuScreen = true;
+bool intro = true;
+int phase = 1;
+int introPhase = 0;
+int shipsDestroyed = 0;
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -60,6 +67,8 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (TTF_Init() == -1)
 		std::cout << "[ERROR] TTF failed to Initialise!" << std::endl;
 
+	intro = true;
+	menuScreen = true;
 	SetupAssets();
 	StartGame();
 }
@@ -68,9 +77,12 @@ void Game::SetupText()
 {
 	pointDisplayer = &manager.AddEntity();
 	SDL_Color white = { 255,255,255,255 };
-	pointDisplayer->AddComponent<UiLabel>(Vector2D(20, 20), "Example", "PixelFont", white);
-}
+	pointDisplayer->AddComponent<UiLabel>(Vector2D(20, 20), "Example", "PixelFont", white, 200);
 
+	storyDisplayer = &manager.AddEntity();
+	storyDisplayer->AddComponent<UiLabel>(Vector2D(WINDOW_WIDTH/ 2 - 400, WINDOW_HEIGHT / 2 - 100), "Example", "PixelFontBig", white, 800);
+	storyDisplayer->drawFromManager = false;
+}
 
 void Game::SetupAssets()
 {
@@ -100,20 +112,26 @@ void Game::SetupAssets()
 	backgroundDest.h = backgroundRect.h;
 
 	// Point displayer
-	assets->AddFont("PixelFont", "Assets/Fonts/coure.fon", 32);
+	assets->AddFont("PixelFont", "Assets/Fonts/vgafix.fon", 72);
+	assets->AddFont("PixelFontBig", "Assets/Fonts/vgafix.fon", 72);
 }
 
 void Game::StartGame()
 {
 	SetupText();
-	Entity& player1 = manager.AddEntity(); // Create Player Entity
-	player1.AddComponent<TransformComponent>(50, 50);
-	player1.AddComponent<SpriteComponent>("FriendlyShip");
-	player1.AddComponent<KeyboardController>();
-	player1.AddComponent<ColliderComponent>(32, 32, "Player");
-	player1.AddComponent<PlayerComponent>();
+	menuScreen = true;
+}
 
-	for (size_t i = 0; i < 3; i++)
+void Game::StartNextWave()
+{
+	Player = &manager.AddEntity(); // Create Player Entity
+	Player->AddComponent<TransformComponent>(50, 50);
+	Player->AddComponent<SpriteComponent>("FriendlyShip");
+	Player->AddComponent<KeyboardController>();
+	Player->AddComponent<ColliderComponent>(32, 32, "Player");
+	Player->AddComponent<PlayerComponent>();
+
+	for (size_t i = 0; i < phase; i++)
 	{
 		Entity& player2 = (manager.AddEntity());
 		player2.AddComponent<TransformComponent>(100 * i, 200);
@@ -140,21 +158,90 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	manager.Refresh();
-	manager.Update();
-	CollisionDetection();
-
 	std::stringstream ss;
-	ss << "Points: " << points;
-	pointDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFont");
-
-	// Are we restarting?
-	if (restarting)
+	if (intro)
 	{
-		if (SDL_GetTicks() - timeOfRestarting > timeBeforeRestarting)
+		if (event.type == SDL_KEYDOWN) 
 		{
-			restarting = false;
-			Restart();
+			if (event.key.keysym.sym == SDLK_SPACE)
+				introPhase++;
+		}
+
+		if (introPhase == 0)
+			ss << "'Happy rememberance day son! Ah what a great day. Actually.. now I think of it, i've never told you the reason for why we celebrate it so highly! [ Press Space to continue ]'" << std::endl;// although centuries have passed. We must never forget the Humans sacrifice. They were once the most advanced species, spanning countles planets. \n Then the 'Gruk' swarmed the MilkyWay, their home system, acting as a hive mind they were on track to devour all life. Mankind refused, they fought to the very last being to prevent the swarm spreading to neighbouring species territory. \n They were unable to save themselves, but their pure stubbourness paved the stepping stones for the once-rivalled species to form the galactic federation. The 'Gruk' were contained long enough for the federation to build up a large enough military prowess to destroy the 'Gruk' horde once and for all." << std::endl;
+		
+		else if (introPhase == 1)
+			ss << "'It marks the day, centuries ago, that the federation was finally able to eradicate the 'Gurk' horde'";
+
+		else if (introPhase == 2)
+ 			ss << "'But more importantly, it honours the great sacrafice a species known as the 'Human Kind' gifted us. ";
+
+		else if (introPhase == 3)
+			ss << "'Before life was even able to comprehend the horrors of the 'Gurk's existence. The human's were the most powerfull species known. They boasted a fleet larger than three species combined and an economy twice as strong as the next highest! To be honest, at that time they were not the most.. liked, with their unusual culture and concerning urge to expand at a rapid rate.";
+		
+		else if (introPhase == 4)
+			ss << "'On the 18th of June in the year 2168, all comms to earth, their capital, and various other planets and ships were lost in a matter of hours.' ";
+
+		else if (introPhase == 5)
+			ss << "'At the time we were confused in why the humans had suddenly gone so quiet. They were usually bothering us 24/7 on crazy things like.. ugh 'Recycling' and other rubbish. No pun intended.' ";
+
+		else if (introPhase == 6)
+			ss << "'22nd of June, an entire 4 days later, we finally recieved communication from the Humans. Only one string of text was recieved, that went as follows: '22/06/2168. All Human occupied planets have been invaded simultaneously. Zero succesfull resistances, survivors are being evacuated. The fleet has suffered excruciating loses. Their armour appears inpenetrable.' - President Eatock of Earth  ";
+		
+		else if (introPhase == 7)
+			ss << "'Which was later followed by '24/06/2168. The enemies armour is immune to all energy weapons, however kinetic works efficiently. We have lost over 70% of our fleet and all occupied territories. They appear to have made every planet inhabitable, destroying most. We are unsure why they are here, but are certain their only purpose is to devour everything in their path. We, the remaining Human resistance shall hold the borders to the last being. We will not let this infection spread out of our teritory. The kinetic weapon discovery will give us a fighting chance, but not enough to win. Use the time we give you to build a fleet and destroy this threat. We pray for you all. - Commander Jefferson. ' ";
+		
+		else if (introPhase == 8)
+			ss << "'They did exactly as they said. They held those borders to the very last ship. Here, let me read some of the logs from some commanders who were apart of the Human resistance..'";
+		
+		else if (introPhase == 9) 
+		{
+			intro = false;
+		}
+
+		storyDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFontBig");
+		return;
+	}
+
+	if (menuScreen)
+	{
+		if (phase == 1)
+			ss << "[June 24th, the begining of the resistance] [Commander Charlie Eggs] Use WASD to move your ship, point with the mouse and left click to fire. Press [Space] when you are ready to start." << std::endl;
+		else
+			ss << "[June " << (24 + phase -1) << ", sucessfully pushing back!][Commander Charlie Eggs]  Press[Space] when you are ready to start." << std::endl;
+
+
+		storyDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFontBig");
+
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.sym == SDLK_SPACE)
+			{
+				menuScreen = false;
+				intro = false;
+				Render();
+				StartNextWave();
+			}
+		}
+	}
+
+	else
+	{
+		manager.Refresh();
+		manager.Update();
+		CollisionDetection();
+		
+		ss << "Day: " << 24 + phase - 1 << "/16/2168";
+		pointDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFont");
+
+		// Are we restarting?
+		if (restarting)
+		{
+			if (SDL_GetTicks() - timeOfRestarting > timeBeforeRestarting)
+			{
+				restarting = false;
+				Restart();
+			}
 		}
 	}
 }
@@ -163,14 +250,23 @@ void Game::Render()
 {
 	SDL_RenderClear(renderer);
 
-	// Draw the background first so it on the bottom.
-	SDL_RenderCopy(Game::renderer, backgroundTexture, &backgroundRect, &backgroundDest);
+	if (menuScreen)
+	{
+		storyDisplayer->Draw();
+	}
 
-	// Draw the game content. All entities
-	manager.Draw();
+	else
+	{
 
-	// Draw the text last so it is on top!
-	pointDisplayer->Draw();
+		// Draw the background first so it on the bottom.
+		SDL_RenderCopy(Game::renderer, backgroundTexture, &backgroundRect, &backgroundDest);
+
+		// Draw the game content. All entities
+		manager.Draw();
+
+		// Draw the text last so it is on top!
+		pointDisplayer->Draw();
+	}
 
 	SDL_RenderPresent(renderer);
 }
@@ -185,14 +281,22 @@ void Game::Clean()
 
 void Game::PlayerDestroyedAShip()
 {
-	points += 10;
+	shipsDestroyed++;
+
+	if (shipsDestroyed == phase)
+	{
+		// Wave complete.
+		phase++;
+		restarting = true;
+		timeOfRestarting = SDL_GetTicks();
+	}
 }
 
 void Game::Restart()
 {
+	shipsDestroyed = 0;
 	colliders.clear();
 	manager.DestroyAllEntities();
-
 	StartGame();
 }
 

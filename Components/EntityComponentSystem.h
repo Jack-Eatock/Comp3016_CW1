@@ -61,6 +61,8 @@ public:
 	Manager& manager;
 	Entity(Manager& mManager) : manager(mManager) {}
 
+	bool drawFromManager = true;
+
 	void Update()
 	{
 		for (int i = 0; i < components.size(); i++)
@@ -115,15 +117,22 @@ public:
 	void Update() 
 	{
 		// Update all entities
-		for (int i = 0; i < entities.size(); i++)
+		for (int i = 0; i < entities.size(); i++) 
+		{
 			entities[i]->Update();
+		}
+			
 	}
 
 	void Draw() 
 	{
 		// Draw all entities
 		for (int i = 0; i < entities.size(); i++)
-			entities[i]->Draw();
+		{
+			if (entities[i]->drawFromManager)
+				entities[i]->Draw();
+		}
+			
 	}
 
 	void Refresh() 
@@ -148,11 +157,6 @@ public:
 		std::unique_ptr<Entity> uPtr{ e }; // Pointer to new entity
 		entities.emplace_back(std::move(uPtr)); // Add new entity to the list of  entities.
 		return *e;
-	}
-
-	Entity& GetEntity()
-	{
-		return *entities[1];
 	}
 
 	void DestroyAllEntities()

@@ -90,10 +90,7 @@ void EnemyComponent::UpdateLocal()
 		if (dist < 20) 
 			headingToLocation = false;
 
-		Manager& temp = entity->manager;
-		Entity& player1 = temp.GetEntity();
-
-		transform->TargetPos = player1.GetComponent<TransformComponent>().Position;
+		transform->TargetPos = Game::Instance->Player->GetComponent<TransformComponent>().Position;
 	}
 
 	else {

@@ -29,6 +29,14 @@ The project was designed so that each object in the game was an "Entity". Every 
 
 <img src="/MarkDownImages/EntityComponentDiagram.drawio.png"  style="height:282px; width:621px;"/>
 
+#### Enemy Ship Statemachine
+
+<img src="/MarkDownImages/EnemyShip.drawio.png"  style="height:148px; width:601x;"/>
+
+#### Wave Game Loop Statemachine
+
+<img src="/MarkDownImages/WaveGameLoop.drawio.png"  style="height:179px; width:631x;"/>
+
 ### Exception handling and test cases
 The project was designed so that each object in the game was an "Entity". Every "Entity" could have various "Components". For example you may have an Entity for a Car. This car would then have a component for taking input from a keyboard, a component for moving the car and a component for visually displaying the car. This allows for the code to be much more organised and helps with flexibility. We can switch out an entities components whenever we please to add or remove functionality at runtime. Similar to how many game engines function, such as the Unity Engine [See reference here](https://unity.com/ecs) or Unreal Engine. Here is a UML Diagram to show this concept:
 

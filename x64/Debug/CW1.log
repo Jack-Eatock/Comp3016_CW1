@@ -14,10 +14,10 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiL
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(244,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(263,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(366,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(387,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(267,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(286,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(389,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(410,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(90,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
@@ -34,4 +34,10 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(1
           [
               T=TransformComponent
           ]
+AssetManager.obj : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+CollisionDetection.obj : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+EnemyComponent.obj : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+PlayerComponent.obj : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+TextureManager.obj : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
+Vector2D.obj : warning LNK4204: '' is missing debugging information for referencing module; linking object as if no debug info
   CW1.vcxproj -> C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\x64\Debug\CW1.exe

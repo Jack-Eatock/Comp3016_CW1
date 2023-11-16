@@ -215,6 +215,29 @@ void Game::Update()
 
 void Game::MenuUpdate()
 {
+	if (phase == 8)
+	{
+		// They survived all phases
+		ss3 << characterName << " having survived for over a week, was met by the Federation's fleet";
+		ss << "So yes.. I lied. Not all humans were eradicated by the 'Gruk'. " << characterName << " survived to tell the tale";
+		ss2 << "Thank you for playing.";
+
+		storyDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFontBig");
+		storyDisplayer2->GetComponent<UiLabel>().SetLabelText(ss2.str(), "PixelFontBig");
+		storyDisplayer3->GetComponent<UiLabel>().SetLabelText(ss3.str(), "PixelFontBig");
+
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.sym == SDLK_SPACE)
+			{
+				if (SDL_GetTicks() - timeOfLastInput > .5f * 1000)
+				{
+					SDL_Quit();
+				}
+			}
+		}
+	}
+
 	// Top text
 	if (captainKIA)
 		ss3 << lastCharacterName << " was lost in battle. ";

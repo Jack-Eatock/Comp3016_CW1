@@ -23,7 +23,7 @@ Download the Repository, open x64 -> Debug and run "CW1.exe". Or alternatively i
 ### UML Design Diagram
 The project was designed so that each object in the game was an "Entity". Every "Entity" could have various "Components". For example you may have an Entity for a Car. This car would then have a component for taking input from a keyboard, a component for moving the car and a component for visually displaying the car. This allows for the code to be much more organised and helps with flexibility. We can switch out an entities components whenever we please to add or remove functionality at runtime. Similar to how many game engines function, such as the Untiy Engine or Unreal Engine. Here is a UML Diagram to show this concept:
 
-<img src="/MarkDownImages/EntityComponentDiagram.drawio.png"  style="height: 100px; width:100px;"/>
+<img src="/MarkDownImages/EntityComponentDiagram.drawio.png"  style="height:282px; width:621px;"/>
 
 ### Exception handling and test cases
 

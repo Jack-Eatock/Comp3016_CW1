@@ -29,6 +29,12 @@ The project was designed so that each object in the game was an "Entity". Every 
 
 <img src="/MarkDownImages/EntityComponentDiagram.drawio.png"  style="height:282px; width:621px;"/>
 
+The game has a main “Game.cpp” file that manages the core functionality of the application. It first initiates all required libraries, such as SDL2. If successful it will then load all the required assets, textures, fonts and data from text files. Once everything is set up it will once per frame iterate over all components on all entities in the game, running their update and draw function. The components then react accordingly, creating an interactive experience.
+If we wanted to add further functionality to the project it would be very easy. We can simply either tweak the current components or create new ones that fit our needs.
+
+Here are some UML diagrams breaking down parts of the game’s logic.
+
+
 #### Enemy Ship Statemachine
 
 <img src="/MarkDownImages/EnemyShip.drawio.png"  style="height:148px; width:601x;"/>

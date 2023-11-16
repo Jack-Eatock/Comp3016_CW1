@@ -139,6 +139,7 @@ void Game::SetupAssets()
 
 	// Read text files
 	dataManager.GetNames();
+	dataManager.GetPhasesStory();
 	dataManager.GetIntroStory();
 }
 
@@ -252,7 +253,17 @@ void Game::MenuUpdate()
 	ss2 << "Press [Space] to play!";
 
 	// Mid Text
-	ss << "[June " << (24 + phase - 1) << "] " << characterName << "'s perspective." << std::endl;
+	std::string phaseNote = "Error";
+	try
+	{
+		phaseNote = dataManager.PhasesLines[phase-1];
+	}
+	catch (const std::exception&)
+	{
+
+	}
+
+	ss << "[June " << (24 + phase - 1) << "] " << characterName << "'s perspective: " << phaseNote << "'" << std::endl;
 
 	storyDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFontBig");
 	storyDisplayer2->GetComponent<UiLabel>().SetLabelText(ss2.str(), "PixelFontBig");

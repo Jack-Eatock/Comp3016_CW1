@@ -99,5 +99,6 @@
   <ItemGroup>
     <Text Include="Assets\Data\Names.txt" />
     <Text Include="Assets\Data\IntroStory.txt" />
+    <Text Include="Assets\Data\Phases.txt" />
   </ItemGroup>
 </Project>

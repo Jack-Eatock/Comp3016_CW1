@@ -32,3 +32,18 @@ void DataManager::GetIntroStory()
     // Close the file
     MyReadFile.close();
 }
+
+void DataManager::GetPhasesStory()
+{
+    const char* path = "Assets/Data/Phases.txt";
+
+    string myText;
+    ifstream MyReadFile(path);
+
+    while (getline(MyReadFile, myText)) {
+        PhasesLines.push_back(myText);
+    }
+
+    // Close the file
+    MyReadFile.close();
+}

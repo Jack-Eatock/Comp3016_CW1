@@ -38,7 +38,7 @@ bool intro = true;
 std::stringstream ss, ss2, ss3;
 
 // Current game stats
-int phase = 6;
+int phase = 1;
 int introPhase = 0;
 int shipsDestroyed = 0;
 std::string characterName = "Name";

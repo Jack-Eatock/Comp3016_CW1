@@ -14,9 +14,10 @@ C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiL
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(32,112): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(38,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\UiLabel.h(39,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(253,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(373,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(394,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(238,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(257,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(377,34): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Src\Game.cpp(398,33): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 C:\Users\jacke\Documents\University\Comp3016\CW1\CW1\Comp3016_CW1\Components\EntityComponentSystem.h(90,33): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [

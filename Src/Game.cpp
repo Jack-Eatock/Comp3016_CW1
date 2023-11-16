@@ -197,10 +197,7 @@ void Game::Update()
 	ss3.swap(tmp3);
 
 	if (intro)
-	{
 		IntroUpdate();
-		return;
-	}
 
 	else if (menuScreen)
 		MenuUpdate();
@@ -216,8 +213,11 @@ void Game::MenuUpdate()
 		ss3 << lastCharacterName << " was lost in battle. ";
 	else if (progressedPhase)
 		ss3 << characterName << " progresses to the next day!";
+	else if (phase == 1)
+		ss3 << "Controls: WASD to move your ship, Left shift to boost and Left Click to fire!";
 	else
 		ss3 << "";
+
 
 	// Bottom Text
 	ss2 << "Press [Space] to play!";
@@ -233,10 +233,14 @@ void Game::MenuUpdate()
 	{
 		if (event.key.keysym.sym == SDLK_SPACE)
 		{
-			menuScreen = false;
-			intro = false;
-			Render();
-			StartNextWave();
+			if (SDL_GetTicks() - timeOfLastInput > .5f * 1000)
+			{
+				timeOfLastInput = SDL_GetTicks();
+				menuScreen = false;
+				intro = false;
+				Render();
+				StartNextWave();
+			}
 		}
 	}
 }
@@ -247,7 +251,7 @@ void Game::IntroUpdate()
 	{
 		if (event.key.keysym.sym == SDLK_SPACE)
 		{
-			if (SDL_GetTicks() - timeOfLastInput > 1 * 1000)
+			if (SDL_GetTicks() - timeOfLastInput > .5f * 1000)
 			{
 				introPhase++;
 				timeOfLastInput = SDL_GetTicks();

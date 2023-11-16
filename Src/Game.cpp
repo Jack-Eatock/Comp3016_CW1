@@ -38,7 +38,7 @@ bool intro = true;
 int phase = 1;
 int introPhase = 0;
 int shipsDestroyed = 0;
-std::string characterName = "Captain Cheggs";
+std::string characterName = "Name";
 std::string lastCharacterName = "";
 bool progressedPhase = false;
 bool captainKIA = false;
@@ -80,12 +80,10 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	else
 		std::cout << "TTF Initialised!" << std::endl;
 
-	dataManager.GetNames();
-	dataManager.GetIntroStory();
-
 	intro = true;
 	menuScreen = true;
 	SetupAssets();
+	NewCharacter();
 	StartGame();
 }
 
@@ -138,6 +136,10 @@ void Game::SetupAssets()
 	// Point displayer
 	assets->AddFont("PixelFont", "Assets/Fonts/vgafix.fon", 72);
 	assets->AddFont("PixelFontBig", "Assets/Fonts/vgafix.fon", 72);
+
+	// Read text files
+	dataManager.GetNames();
+	dataManager.GetIntroStory();
 }
 
 void Game::StartGame()
@@ -222,7 +224,6 @@ void Game::MenuUpdate()
 		ss3 << "Controls: WASD to move your ship, Left shift to boost and Left Click to fire!";
 	else
 		ss3 << "";
-
 
 	// Bottom Text
 	ss2 << "Press [Space] to play!";
@@ -327,7 +328,6 @@ void Game::Render()
 
 	else
 	{
-
 		// Draw the background first so it on the bottom.
 		SDL_RenderCopy(Game::renderer, backgroundTexture, &backgroundRect, &backgroundDest);
 
@@ -390,7 +390,26 @@ void Game::PlayerDied()
 void Game::NewCharacter()
 {
 	lastCharacterName = characterName;
-	characterName = "aa";
+
+	std::mt19937 gen{ seed() }; // seed the generator
+	std::uniform_int_distribution<> dist{ 0, (int)dataManager.Names.size() -1};
+	int randIndex = dist(gen);
+
+	try
+	{
+		characterName = dataManager.Names[randIndex];
+		if (characterName == lastCharacterName) {
+			NewCharacter();
+			return;
+		}
+			
+		std::cout << "New character:"  << characterName  << randIndex << std::endl;
+	}
+	catch (const std::exception&)
+	{
+		std::cout << "[ERROR] failed to parse in name index " << randIndex << std::endl;
+	}
+	
 }
 
 void Game::CollisionDetection()

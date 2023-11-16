@@ -237,6 +237,7 @@ void Game::MenuUpdate()
 				}
 			}
 		}
+		return;
 	}
 
 	// Top text

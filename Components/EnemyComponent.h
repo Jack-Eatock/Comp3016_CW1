@@ -35,7 +35,7 @@ private:
 		bool headingToLocation = false;
 		Vector2D targetPos;
 		float timeOfLastShot;
-		float timeToReload = 1000/2;
+		float timeToReload =  1.00f * 1000;
 		float initialDelay = 0;
 		float spawnTime = 0;
 		int health = 3;

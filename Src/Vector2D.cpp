@@ -1,5 +1,10 @@
 #include "../Headers/Vector2D.h"
 
+/// <summary>
+/// Provides a usefull interface for handling two dimensional vectors.
+/// Perfect for moving objects in a two dimensional world.
+/// </summary>
+
 Vector2D::Vector2D() 
 {
 	X = 0.0f;

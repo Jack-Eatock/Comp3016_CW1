@@ -2,7 +2,6 @@
 #include "../Headers/Game.h"
 
 Game* game = nullptr;
-
 int main(int argc, char *argv[])
 {
     const int fps = 60;
@@ -24,9 +23,7 @@ int main(int argc, char *argv[])
         if (frameDelay > frameTime) 
             SDL_Delay(frameDelay - frameTime);
     }
-
     game->Clean();
-
     return 0;
 }
 

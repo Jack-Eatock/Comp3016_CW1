@@ -10,7 +10,6 @@ class ColliderComponent : public Component
 public:
 	SDL_Rect collider;
 	std::string tag;
-
 	TransformComponent* transform;
 
 	/// <summary>

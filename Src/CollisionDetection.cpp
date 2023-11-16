@@ -2,6 +2,7 @@
 
 bool CollisionDetection::RectCollision_AABB(const SDL_Rect& recA, const SDL_Rect& recB)
 {
+	//  Check if the two sqaure colliders are overlapping.
 	if (
 		recA.x + recA.w >= recB.x &&
 		recB.x + recB.w >= recA.x &&
@@ -23,6 +24,7 @@ bool CollisionDetection::RectCollision_AABB(const ColliderComponent& colA, const
 		
 		if (colA.tag == "Player")
 		{
+			// The player has collided with something. Inform the player of the collision.
 			if (colA.entity->HasComponent<PlayerComponent>())
 				colA.entity->GetComponent<PlayerComponent>().Collision(colB);
 		}
@@ -32,6 +34,7 @@ bool CollisionDetection::RectCollision_AABB(const ColliderComponent& colA, const
 		}
 		else if (colA.tag == "Enemy")
 		{
+			// An enemy has collided with something. Inform the enemy of the collision.
 			if (colA.entity->HasComponent<EnemyComponent>())
 				colA.entity->GetComponent<EnemyComponent>().Collision(colB);
 		}

@@ -9,15 +9,16 @@ void PlayerComponent::Fire()
 	if (destroyed)
 		return;
 
+	//  Limit fire rate
 	if (SDL_GetTicks() - timeOfLastShot < timeToReload)
 		return;
 
+	// Spawn and fire bullet.
 	std::string spriteId = "Bullet";
 	std::string colliderId = "FriendlyBullet";
 	Vector2D direction = transform->TargetPos;
 	direction -= transform->Position;
 	direction = direction.Normalise();
-
 	float offset = 32;
 	Vector2D startPos = transform->Position;
 	startPos.Add(Vector2D(direction.X * offset, direction.Y * offset));
@@ -33,18 +34,17 @@ void PlayerComponent::Collision(const ColliderComponent& collider)
 	{
 		collider.entity->Destroy();
 		health--;
-		// Switch visual
+
+		// Switch visual to show the amount of damage.
 		if (health == 2)
 			entity->GetComponent<SpriteComponent>().SetText("FriendlyShip_DMG1");
 
 		else if (health == 1)
 			entity->GetComponent<SpriteComponent>().SetText("FriendlyShip_DMG2");
 
-		else if (health <= 0)
-			entity->GetComponent<SpriteComponent>().SetText("FriendlyShip_DMG3");
-
 		if (health <= 0)
 		{
+			entity->GetComponent<SpriteComponent>().SetText("FriendlyShip_DMG3");
 			TransformComponent* transform = &entity->GetComponent<TransformComponent>();
 			transform->useInput = false;
 			transform->rotateTowardsTarget = false;

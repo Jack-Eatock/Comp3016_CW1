@@ -18,23 +18,26 @@ AssetManager* Game::assets = new AssetManager(&manager);
 SDL_Surface* backgroundSurface;
 SDL_Texture* backgroundTexture;
 SDL_Rect backgroundRect, backgroundDest;
-Game::Game() {};
-Game::~Game() {}
 
 // Current Playthrough
 bool restarting = false;
 float timeOfRestarting = 0;
 float timeBeforeRestarting = 2 * 1000;
 
+// Frequently used Entities. Easier to have a direct reference to them.
 Entity* Player;
 Entity* pointDisplayer;
 Entity* storyDisplayer;
 Entity* storyDisplayer2;
 Entity* storyDisplayer3;
 
+// Required
 std::random_device seed;
 bool menuScreen = true;
 bool intro = true;
+std::stringstream ss, ss2, ss3;
+
+// Current game stats
 int phase = 1;
 int introPhase = 0;
 int shipsDestroyed = 0;
@@ -42,8 +45,10 @@ std::string characterName = "Name";
 std::string lastCharacterName = "";
 bool progressedPhase = false;
 bool captainKIA = false;
-std::stringstream ss, ss2, ss3;
 float timeOfLastInput = 0;
+
+Game::Game() {};
+Game::~Game() {}
 
 void Game::Init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -87,6 +92,9 @@ void Game::Init(const char* title, int xpos, int ypos, int width, int height, bo
 	StartGame();
 }
 
+/// <summary>
+/// Sets up the text displayers so that they can be used to show information throughout the programme.
+/// </summary>
 void Game::SetupText() 
 {
 	pointDisplayer = &manager.AddEntity();
@@ -106,6 +114,9 @@ void Game::SetupText()
 	storyDisplayer3->drawFromManager = false;
 }
 
+/// <summary>
+/// Loads assets. Textfiles, Images and fonts from the assets folder into the programme.
+/// </summary>
 void Game::SetupAssets()
 {
 	// Friendly Ship
@@ -149,6 +160,10 @@ void Game::StartGame()
 	menuScreen = true;
 }
 
+/// <summary>
+/// Starts the next wave.
+/// Reset's game stats, spawns the player and x number of enemies. 
+/// </summary>
 void Game::StartNextWave()
 {
 	progressedPhase = false;
@@ -179,6 +194,9 @@ void Game::StartNextWave()
 	}
 }
 
+/// <summary>
+/// Listens to input events and stores them locally to be used throughout the game.
+/// </summary>
 void Game::HandleEvents()
 {
 	SDL_PollEvent(&event);
@@ -214,8 +232,12 @@ void Game::Update()
 		GameUpdate();
 }
 
+/// <summary>
+/// If we are displaying a menu, this update will be called every frame to react to the player inputs.
+/// </summary>
 void Game::MenuUpdate()
 {
+	// They have won the game!
 	if (phase == 8)
 	{
 		// They survived all phases
@@ -232,13 +254,13 @@ void Game::MenuUpdate()
 			if (event.key.keysym.sym == SDLK_SPACE)
 			{
 				if (SDL_GetTicks() - timeOfLastInput > .5f * 1000)
-				{
-					SDL_Quit();
-				}
+					Clean();
 			}
 		}
 		return;
 	}
+
+	// Display the current phase and any other information. Allow for them to press space to initate the next wave/phase.
 
 	// Top text
 	if (captainKIA)
@@ -263,13 +285,10 @@ void Game::MenuUpdate()
 	{
 
 	}
-
 	ss << "[June " << (24 + phase - 1) << "] " << characterName << "'s perspective: " << phaseNote << "'" << std::endl;
-
 	storyDisplayer->GetComponent<UiLabel>().SetLabelText(ss.str(), "PixelFontBig");
 	storyDisplayer2->GetComponent<UiLabel>().SetLabelText(ss2.str(), "PixelFontBig");
 	storyDisplayer3->GetComponent<UiLabel>().SetLabelText(ss3.str(), "PixelFontBig");
-
 	if (event.type == SDL_KEYDOWN)
 	{
 		if (event.key.keysym.sym == SDLK_SPACE)
@@ -286,6 +305,10 @@ void Game::MenuUpdate()
 	}
 }
 
+/// <summary>
+/// Currently displaying the introduction to the game. This is called every frame during the intro
+/// allowing for the game to react to the players inputs.
+/// </summary>
 void Game::IntroUpdate()
 {
 	if (event.type == SDL_KEYDOWN)
@@ -330,6 +353,10 @@ void Game::IntroUpdate()
 	storyDisplayer2->GetComponent<UiLabel>().SetLabelText(ss2.str(), "PixelFontBig");
 }
 
+/// <summary>
+/// When the game is in game state. Iterates over all entities updating their components. They then react accordingly.
+/// Updates the objects in the game.
+/// </summary>
 void Game::GameUpdate()
 {
 	manager.Refresh();
@@ -350,6 +377,10 @@ void Game::GameUpdate()
 	}
 }
 
+/// <summary>
+/// In game mode, it loops over every entity rendering their content.
+/// In menu mode, it displays the appropriate text.
+/// </summary>
 void Game::Render()
 {
 	SDL_RenderClear(renderer);
@@ -376,6 +407,9 @@ void Game::Render()
 	SDL_RenderPresent(renderer);
 }
 
+/// <summary>
+/// Clean up SDL rendering
+/// </summary>
 void Game::Clean() 
 {
 	SDL_DestroyWindow(window);
@@ -384,6 +418,10 @@ void Game::Clean()
 	std::cout << "Game Cleaned " << std::endl;
 }
 
+/// <summary>
+/// The player destroyed an enemy ship. Check if they are all destroyed.
+/// if so, move to the next wave.
+/// </summary>
 void Game::PlayerDestroyedAShip()
 {
 	if (restarting)
@@ -402,6 +440,9 @@ void Game::PlayerDestroyedAShip()
 	}
 }
 
+/// <summary>
+/// Reset all entities and start the current wave from fresh.
+/// </summary>
 void Game::Restart()
 {
 	shipsDestroyed = 0;
@@ -410,6 +451,9 @@ void Game::Restart()
 	StartGame();
 }
 
+/// <summary>
+/// The player has died. Restart the current wave.
+/// </summary>
 void Game::PlayerDied()
 {
 	if (restarting)
@@ -422,14 +466,15 @@ void Game::PlayerDied()
 	timeOfRestarting = SDL_GetTicks();
 }
 
+/// <summary>
+/// Grab a newly generate character name. And set the old one to last.
+/// </summary>
 void Game::NewCharacter()
 {
 	lastCharacterName = characterName;
-
 	std::mt19937 gen{ seed() }; // seed the generator
 	std::uniform_int_distribution<> dist{ 0, (int)dataManager.Names.size() -1};
 	int randIndex = dist(gen);
-
 	try
 	{
 		characterName = dataManager.Names[randIndex];
@@ -447,6 +492,9 @@ void Game::NewCharacter()
 	
 }
 
+/// <summary>
+/// Check all entities for collisions.
+/// </summary>
 void Game::CollisionDetection()
 {
 	for (auto colider : Game::colliders)

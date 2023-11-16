@@ -13,26 +13,27 @@ void EnemyComponent::Collision(const ColliderComponent& collider)
 
 	if (collider.tag == "FriendlyBullet")
 	{
+		// Destroy the bullet that hit this ship.
 		collider.entity->Destroy();
 		health--;
 
-		// Switch visual
+		// Switch visual to show slightly damaged ship.
 		if (health == 2)
 			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG1");
 
+		// Switch visual to show very damaged ship.
 		else if (health == 1)
 			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG2");
 
-		else if (health <= 0)
-			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG3");
-
+		// The ship has been destroyed.
 		if (health <= 0)
 		{
+			// Switch visual to show destroyed ship.
+			entity->GetComponent<SpriteComponent>().SetText("EnemyShip_DMG3");
 			TransformComponent* transform = &entity->GetComponent<TransformComponent>();
 			transform->useInput = false;
 			transform->rotateTowardsTarget = false;
 			Game::Instance->PlayerDestroyedAShip();
-
 			destroyed = true;
 			timeOfDestroy = SDL_GetTicks();
 		}
@@ -41,6 +42,7 @@ void EnemyComponent::Collision(const ColliderComponent& collider)
 
 void EnemyComponent::Fire()
 {
+	// Limit fire rate. Check if the time  since last shot is more than the reload time.
 	if (SDL_GetTicks() - timeOfLastShot < timeToReload)
 		return;
 
@@ -51,67 +53,64 @@ void EnemyComponent::Fire()
 	direction -= transform->Position;
 	direction = direction.Normalise();
 
+	// Offset the bullet from the ship. So it spawns in front etc.
 	float offset = 32;
 	Vector2D startPos = transform->Position;
 	startPos.Add(Vector2D(direction.X * offset, direction.Y * offset));
 	Game::assets->SpawnBullet(startPos, 1000, 25, spriteId, colliderId, direction);
-	
 }
 
 void EnemyComponent::UpdateLocal()
 {
 	if (destroyed) 
 	{
+		// Wait a couple seconds showing the destroyed ship before despawning.
 		if (SDL_GetTicks() - timeOfDestroy > timeUntilDespawn) 
-		{
 			entity->Destroy();
-		}
 		return;
 	}
 
-	//std::cout << "AA " << initialDelay - spawnTime << std::endl;
+	// How frequently should the ai try to shoot
 	if (SDL_GetTicks() >  spawnTime + initialDelay ) {
 		Fire();
 	}
 
+	// The ai flies to a location.
 	if (headingToLocation) {
 
 		// Have they reached the location?
-		// chekc the distance from.
 		float dist = transform->DistanceBetweenPoints(transform->Position, targetPos);
-		//std::cout << id << " " << dist << " " << transform->Position << std::endl;
-
 		Vector2D direction = targetPos;
 		direction.Subtract(transform->Position);
 		direction = direction.Normalise();
 
 		transform->MovementInput = direction;
 
+		// If they are close enough, count it as them reaching the location. pick a new one.
 		if (dist < 20) 
 			headingToLocation = false;
 
+		// Move towards the location.
 		transform->TargetPos = Game::Instance->Player->GetComponent<TransformComponent>().Position;
 	}
 
+	// Choose a location for the ai to fly to.
 	else {
+		// Generate random coords to fly to.
 		std::mt19937 gen{ seed() }; // seed the generator
-
 		std::uniform_int_distribution<> dist{ 30, WINDOW_WIDTH - 30 };
 		int randX = dist(gen);
-
 		std::uniform_int_distribution<> dist2{ 30, WINDOW_HEIGHT - 30 };
 		int randY = dist2(gen);
 
-		// Fly to location
-		// Get direction to the location
+		// Pick a random location to fly to
 		targetPos = Vector2D(randX, randY);
-
 		Vector2D direction = targetPos;
 		direction.Subtract(transform->Position);
 		direction = direction.Normalise();
-
 		transform->MovementInput = direction;
 
+		// Location set, now start flying there.
 		headingToLocation = true;
 	}
 }

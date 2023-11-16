@@ -63,10 +63,11 @@ public:
 
 		if (rotateTowardsTarget)
 			RotateTowardsTarget();
-
-		//std::cout << "here " << Position << " a " << Speed << std::endl;
 	}
 
+	/// <summary>
+	/// Adjust the velocity of the ship  based on the inputs provided.
+	/// </summary>
 	void CalculateMovement()
 	{
 		Vector2D normalisedInput = MovementInput.Normalise();
@@ -76,6 +77,9 @@ public:
 		Velocity.Y = Velocity.Y + (normalisedInput.Y * ACCELERATION);
 	}
 
+	/// <summary>
+	/// Slows the ship down gradually.
+	/// </summary>
 	void ApplyDrag()
 	{
 		// Apply Drag
@@ -114,6 +118,9 @@ public:
 			Velocity.Y = 0;
 	}
 
+	/// <summary>
+	/// Prevents the ship from leaving the bounds of the map by bouncing it off the sides.
+	/// </summary>
 	void KeepWithinBounds()
 	{
 		// If they go out of bounds, push them back.
@@ -153,6 +160,9 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// Rotates the ship to look towards the set target.
+	/// </summary>
 	void RotateTowardsTarget()
 	{
 		// Calculate the angle of the ship. Look at direction from ship to mouse pos.
@@ -160,6 +170,9 @@ public:
 		Angle = (radAngle * 180 / M_PI);
 	}
 
+	/// <summary>
+	/// Calculates the distance between to two dimensional vectors.
+	/// </summary>
 	float DistanceBetweenPoints(Vector2D vec1, Vector2D vec2) 
 	{
 		return (powf((powf((vec2.X - vec1.X), 2) + powf((vec2.Y - vec1.Y), 2)), 0.5));

@@ -31,28 +31,22 @@ public:
 
 	void Update() override 
 	{
+		// Move the bullet towards the target (The player)
 		distance = transform->DistanceBetweenPoints(transform->Position, startPos);
-		//std::cout << "Dis" << distance << std::endl;
-
 		Vector2D velocity = direction;
 		velocity.Multiply(Vector2D(speed, speed));
 		transform->Velocity = velocity;
 
+		// If the bullet is out of range destroy it.
 		if (distance > range)
-		{
-			std::cout << "Out of range" << std::endl;
 			entity->Destroy();
-		}
 	}
 
 private:
-
 	TransformComponent* transform;
-
 	Vector2D startPos;
 	int range = 0;
 	int speed = 0;
 	int distance = 0;
 	Vector2D direction = Vector2D(0,0);
-
 };

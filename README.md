@@ -22,7 +22,7 @@ The game plays like an arcade machine, challenging the player to reach further a
 
 ### Links
 - [Github Repository](https://github.com/Jack-Eatock/Comp3016_CW1)
-- [Video Demonstration](https://github.com/Jack-Eatock/Comp3016_CW1)
+- [Video Demonstration](https://www.youtube.com/watch?v=j0AH8hSmwb4&ab_channel=JackEatock)
 
 ### UML Design Diagram
 The project was designed so that each object in the game was an "Entity". Every "Entity" could have various "Components". For example you may have an Entity for a Car. This car would then have a component for taking input from a keyboard, a component for moving the car and a component for visually displaying the car. This allows for the code to be much more organised and helps with flexibility. We can switch out an entities components whenever we please to add or remove functionality at runtime. Similar to how many game engines function, such as the Untiy Engine or Unreal Engine. Here is a UML Diagram to show this concept:
